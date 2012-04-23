@@ -264,14 +264,14 @@ namespace iTextSharp.text {
         /// to the body of the document.
         /// </remarks>
         public virtual void Open() {
-            if (! close) {
-                open = true;
-            }
-            foreach (IDocListener listener in listeners) {
-                listener.SetPageSize(pageSize);
-                listener.SetMargins(marginLeft, marginRight, marginTop, marginBottom);
-                listener.Open();
-            }
+           if (! close) {
+              open = true;
+           }
+           foreach (IDocListener listener in listeners) {
+              listener.SetPageSize(pageSize);
+              listener.SetMargins(marginLeft, marginRight, marginTop, marginBottom);
+              listener.Open();
+           }
         }
 
         /// <summary>
