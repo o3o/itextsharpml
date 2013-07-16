@@ -49,7 +49,6 @@ using System;
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 namespace iTextSharp.text {
     /// <summary>
     /// A class that implements DocListener will perform some
@@ -58,7 +57,7 @@ namespace iTextSharp.text {
     /// <seealso cref="T:iTextSharp.text.IElementListener"/>
     /// <seealso cref="T:iTextSharp.text.Document"/>
     /// <seealso cref="T:iTextSharp.text.DocWriter"/>
-    public interface IDocListener : IElementListener {
+    public interface IDocListener: IElementListener {
     
         // methods
     
