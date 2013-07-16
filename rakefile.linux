@@ -6,7 +6,7 @@ require 'rake/packagetask'
 ##################
 # SETTING
 ##################
-VERSION = '4.1.6'
+VERSION = '4.2.0'
 
 SRC = FileList[ "*.cs", "iTextSharp/**/*.cs", "System/**/*.cs", "srcbc/**/*.cs"]
 
