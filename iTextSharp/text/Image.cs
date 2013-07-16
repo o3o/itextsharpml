@@ -535,7 +535,6 @@ namespace iTextSharp.text {
                 byte[] pixelsByte = new byte[byteWidth * h];
             
                 int index = 0;
-                int size = h * w;
                 int transColor = 1;
                 if (color != null) {
                     transColor = (color.R + color.G + color.B < 384) ? 0 : 1;
@@ -599,7 +598,7 @@ namespace iTextSharp.text {
                 byte[] smask = null;
             
                 int index = 0;
-                int size = h * w;
+                
                 int red = 255;
                 int green = 255;
                 int blue = 255;

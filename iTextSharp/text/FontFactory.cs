@@ -63,10 +63,8 @@ namespace iTextSharp.text {
         
       private static FontFactoryImp fontImp = new FontFactoryImp();
 
-      /** This is the default encoding to use. */
       private static string defaultEncoding = BaseFont.WINANSI;
     
-      /** This is the default value of the <VAR>embedded</VAR> variable. */
       private static bool defaultEmbedding = BaseFont.NOT_EMBEDDED;
     
       private FontFactory() { }
@@ -366,9 +364,7 @@ namespace iTextSharp.text {
             return fontImp;
          }
          set {
-            if (value == null) {
-               throw new ArgumentNullException("FontFactoryImp cannot be null.");
-            }
+            Requires.IsNotNull(value, "value");
             fontImp = value;
          }
       }

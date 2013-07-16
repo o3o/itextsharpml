@@ -508,7 +508,7 @@ namespace iTextSharp.text {
        * @param dir the directory
        * @return the number of fonts registered
        */    
-      public virtual int RegisterDirectory(String dir) {
+      public virtual int RegisterDirectory(string dir) {
          return RegisterDirectory(dir, false);
       }
 
@@ -519,38 +519,33 @@ namespace iTextSharp.text {
        * @return the number of fonts registered
        * @since 2.1.2
        */
-      public int RegisterDirectory(String dir, bool scanSubdirectories) {
+      public int RegisterDirectory(string baseDir, bool scanSubdirectories) {
          int count = 0;
          try {
-            if (!Directory.Exists(dir))
-               return 0;
-            string[] files = Directory.GetFiles(dir);
-            if (files == null)
-               return 0;
-            for (int k = 0; k < files.Length; ++k) {
-               try {
-                  if (Directory.Exists(files[k])) {
-                     if (scanSubdirectories) {
-                        count += RegisterDirectory(Path.GetFullPath(files[k]), true);
-                     }
-                  } else {
-                     String name = Path.GetFullPath(files[k]);
-                     String suffix = name.Length < 4 ? null : name.Substring(name.Length - 4).ToLower(CultureInfo.InvariantCulture);
-                     if (".afm".Equals(suffix) || ".pfm".Equals(suffix)) {
-                        /* Only register Type 1 fonts with matching .pfb files */
-                        string pfb = name.Substring(0, name.Length - 4) + ".pfb";
-                        if (File.Exists(pfb)) {
-                           Register(name, null);
-                           ++count;
-                        }
-                     } else if (".ttf".Equals(suffix) || ".otf".Equals(suffix) || ".ttc".Equals(suffix)) {
+            if (!Directory.Exists(baseDir)) return 0;
+            
+            string[] files = Directory.GetFiles(baseDir);
+            if (files != null) {
+               foreach (string file in files) { 
+                  string name = Path.GetFullPath(file);
+                  string suffix = GetSuffix(name);
+                  if (".afm".Equals(suffix) || ".pfm".Equals(suffix)) {
+                     /* Only register Type 1 fonts with matching .pfb files */
+                     string pfb = name.Substring(0, name.Length - 4) + ".pfb";
+                     if (File.Exists(pfb)) {
                         Register(name, null);
                         ++count;
                      }
+                  } else if (".ttf".Equals(suffix) || ".otf".Equals(suffix) || ".ttc".Equals(suffix)) {
+                     Register(name, null);
+                     ++count;
                   }
                }
-               catch  {
-                  //empty on purpose
+            }
+            if (scanSubdirectories) {
+               var dirs = System.IO.Directory.GetDirectories(baseDir);
+               foreach (string dir in dirs) { 
+                  count += RegisterDirectory(dir, true);
                }
             }
          }
@@ -560,10 +555,15 @@ namespace iTextSharp.text {
          return count;
       }
 
-      /** Register fonts in some probable directories. It usually works in Windows,
-       * Linux and Solaris.
-       * @return the number of fonts registered
-       */    
+      private string GetSuffix(string name) {
+         return name.Length < 4 ? null : name.Substring(name.Length - 4).ToLower(CultureInfo.InvariantCulture);
+      }
+
+      /** 
+          Register fonts in some probable directories. It usually works in Windows,
+          Linux and Solaris.
+          @return the number of fonts registered
+      */
       public virtual int RegisterDirectories() {
          int count = 0;
          count += RegisterDirectory("c:/windows/fonts");
