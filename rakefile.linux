@@ -3,7 +3,6 @@
 require 'rake/clean'
 require 'rake/packagetask'
 
-
 ##################
 # SETTING
 ##################
@@ -11,7 +10,7 @@ VERSION = '4.1.6'
 
 SRC = FileList[ "*.cs", "iTextSharp/**/*.cs", "System/**/*.cs", "srcbc/**/*.cs"]
 
-BASE_NAME = "itextsharp.dll"
+BASE_NAME = "itextsharp"
 TARGET = 'library'
 ASSEMBLY_UNDER_TEST = ""
 
@@ -34,15 +33,13 @@ RES_OPT = ""
 
 #-pkg:glade-sharp-2.0  -pkg:mono-cairo -pkg:gtk-sharp-2.0
 COMPILER_OPT = ''
-
 REFERENCE_OPT = REFS.empty? ? "" : "-r:#{REFS.join(',')}"
 PKG_FILES = FileList["#{BUILD_DIR}/*.exe", "#{BUILD_DIR}/*.dll", "#{BUILD_DIR}/*.log4net"]
 
 ##############################
 # PROGRAM
 ##############################
-
-CSC = "gmcs"
+CSC = "dmcs"
 RESGEN = "resgen2"
 NUNIT = "~/nunit4 -nologo"
 NLOC = "~/nloc"
@@ -176,10 +173,14 @@ end
 desc "Aggiorna, compila e pubblica"
 task :all => [:up, :compile, :publish]
 
-
 Rake::PackageTask.new(BASE_NAME, VERSION) do |p|
   p.need_tar_bz2 = true
   p.need_zip = false
   p.need_tar = false
   p.package_files = PKG_FILES
+end
+
+desc "Crea un backup dei sorgenti"
+task :src_pkg do
+  system "tar -cjf #{BASE_NAME}_src-#{VERSION}.tar.bz2 #{SRC}"
 end
