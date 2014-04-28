@@ -1,8 +1,6 @@
 using System;
 
 /*
- * $Id: IDocListener.cs,v 1.5 2008/05/13 11:25:10 psoares33 Exp $
- * 
  *
  * Copyright (c) 1999, 2000, 2001, 2002 Bruno Lowagie.
  *
@@ -50,107 +48,89 @@ using System;
  * http://www.lowagie.com/iText/
  */
 namespace iTextSharp.text {
-    /// <summary>
-    /// A class that implements DocListener will perform some
-    /// actions when some actions are performed on a Document.
-    /// </summary>
-    /// <seealso cref="T:iTextSharp.text.IElementListener"/>
-    /// <seealso cref="T:iTextSharp.text.Document"/>
-    /// <seealso cref="T:iTextSharp.text.DocWriter"/>
-    public interface IDocListener: IElementListener {
-    
-        // methods
-    
-        /// <summary>
-        /// Signals that the Document has been opened and that
-        /// Elements can be added.
-        /// </summary>
-        void Open();
-    
-        /// <summary>
-        /// Signals that the Document was closed and that no other
-        /// Elements will be added.
-        /// </summary>
-        /// <remarks>
-        /// The output stream of every writer implementing IDocListener will be closed.
-        /// </remarks>
-        void Close();
+   /*
+      A class that implements DocListener will perform some
+      actions when some actions are performed on a Document.
+   */
+   public interface IDocListener: IElementListener {
+      /*
+         Signals that the Document has been opened and that
+         Elements can be added.
+      */
+      void Open();
 
-        /// <summary>
-        /// Signals that an new page has to be started.
-        /// </summary>
-        /// <returns>true if the page was added, false if not.</returns>
-        bool NewPage();
-    
-        /// <summary>
-        /// Sets the pagesize.
-        /// </summary>
-        /// <param name="pageSize">the new pagesize</param>
-        /// <returns>a boolean</returns>
-        bool SetPageSize(Rectangle pageSize);
-    
-        /// <summary>
-        /// Sets the margins.
-        /// </summary>
-        /// <param name="marginLeft">the margin on the left</param>
-        /// <param name="marginRight">the margin on the right</param>
-        /// <param name="marginTop">the margin on the top</param>
-        /// <param name="marginBottom">the margin on the bottom</param>
-        /// <returns></returns>
-        bool SetMargins(float marginLeft, float marginRight, float marginTop, float marginBottom);
-    
-        /**
-        * Parameter that allows you to do margin mirroring (odd/even pages)
-        * @param marginMirroring
-        * @return true if succesfull
-        */
-        bool SetMarginMirroring(bool marginMirroring);
+      /*
+         Signals that the Document was closed and that no other
+         Elements will be added.
+         The output stream of every writer implementing IDocListener will be closed.
+      */
+      void Close();
 
-        /**
-        * Parameter that allows you to do top/bottom margin mirroring (odd/even pages)
-        * @param marginMirroringTopBottom
-        * @return true if successful
-        * @since	2.1.6
-        */
-        bool SetMarginMirroringTopBottom(bool marginMirroringTopBottom); // [L6]
+      /*
+         Signals that an new page has to be started.
+         true if the page was added, false if not.
+      */
+      bool NewPage();
 
-        /// <summary>
-        /// Sets the page number.
-        /// </summary>
-        /// <value>the new page number</value>
-        int PageCount {
-            set;
-        }
-    
-        /// <summary>
-        /// Sets the page number to 0.
-        /// </summary>
-        void ResetPageCount();
-    
-        /// <summary>
-        /// Changes the header of this document.
-        /// </summary>
-        /// <value>a Header</value>
-        HeaderFooter Header {
-            set;
-        }
-    
-        /// <summary>
-        /// Resets the header of this document.
-        /// </summary>
-        void ResetHeader();
-    
-        /// <summary>
-        /// Changes the footer of this document.
-        /// </summary>
-        /// <value>a Footer</value>
-        HeaderFooter Footer {
-            set;
-        }
-    
-        /// <summary>
-        /// Resets the footer of this document.
-        /// </summary>
-        void ResetFooter();
-    }
+      /*
+         Sets the pagesize.
+      */
+      bool SetPageSize(Rectangle pageSize);
+
+      /*
+         Sets the margins.
+      */
+      bool SetMargins(float marginLeft, float marginRight, float marginTop, float marginBottom);
+
+      /**
+       * Parameter that allows you to do margin mirroring (odd/even pages)
+       * @param marginMirroring
+       * @return true if succesfull
+       */
+      bool SetMarginMirroring(bool marginMirroring);
+
+      /**
+       * Parameter that allows you to do top/bottom margin mirroring (odd/even pages)
+       * @param marginMirroringTopBottom
+       * @return true if successful
+       * @since   2.1.6
+       */
+      bool SetMarginMirroringTopBottom(bool marginMirroringTopBottom); // [L6]
+
+      /*
+         Sets the page number.
+      */
+      int PageCount {
+         set;
+      }
+
+      /*
+         Sets the page number to 0.
+      */
+      void ResetPageCount();
+
+      /*
+         Changes the header of this document.
+      */
+      HeaderFooter Header {
+         set;
+      }
+
+      /*
+         Resets the header of this document.
+      */
+      void ResetHeader();
+
+      /*
+         Changes the footer of this document.
+      */
+      HeaderFooter Footer {
+         set;
+      }
+
+      /*
+         Resets the footer of this document.
+      */
+      void ResetFooter();
+   }
 }

@@ -13,7 +13,7 @@ using iTextSharp.text.pdf.codec;
 
 /*
  * $Id: Image.cs,v 1.28 2008/05/13 11:25:11 psoares33 Exp $
- * 
+ *
  *
  * Copyright 1999, 2000, 2001, 2002 by Bruno Lowagie.
  *
@@ -69,51 +69,51 @@ namespace iTextSharp.text {
     /// <seealso cref="T:iTextSharp.text.Element"/>
     /// <seealso cref="T:iTextSharp.text.Rectangle"/>
     public abstract class Image : Rectangle {
-    
+
         // static membervariables (concerning the presence of borders)
-    
+
         /// <summary> this is a kind of image Element. </summary>
         public const int DEFAULT = 0;
-    
+
         /// <summary> this is a kind of image Element. </summary>
         public const int RIGHT_ALIGN = 2;
-    
+
         /// <summary> this is a kind of image Element. </summary>
         public const int LEFT_ALIGN = 0;
-    
+
         /// <summary> this is a kind of image Element. </summary>
         public const int MIDDLE_ALIGN = 1;
-    
+
         /// <summary> this is a kind of image Element. </summary>
         public const int TEXTWRAP = 4;
-    
+
         /// <summary> this is a kind of image Element. </summary>
         public const int UNDERLYING = 8;
-    
+
         /// <summary> This represents a coordinate in the transformation matrix. </summary>
         public const int AX = 0;
-    
+
         /// <summary> This represents a coordinate in the transformation matrix. </summary>
         public const int AY = 1;
-    
+
         /// <summary> This represents a coordinate in the transformation matrix. </summary>
         public const int BX = 2;
-    
+
         /// <summary> This represents a coordinate in the transformation matrix. </summary>
         public const int BY = 3;
-    
+
         /// <summary> This represents a coordinate in the transformation matrix. </summary>
         public const int CX = 4;
-    
+
         /// <summary> This represents a coordinate in the transformation matrix. </summary>
         public const int CY = 5;
-    
+
         /// <summary> This represents a coordinate in the transformation matrix. </summary>
         public const int DX = 6;
-    
+
         /// <summary> This represents a coordinate in the transformation matrix. </summary>
         public const int DY = 7;
-    
+
         /** type of image */
         public const int ORIGINAL_NONE = 0;
 
@@ -146,43 +146,43 @@ namespace iTextSharp.text {
 
         /** Image color inversion */
         protected bool invert = false;
-    
+
         /// <summary> The imagetype. </summary>
         protected int type;
-    
+
         /// <summary> The URL of the image. </summary>
         protected Uri url;
-    
+
         /// <summary> The raw data of the image. </summary>
         protected byte[] rawData;
-    
+
         /// <summary> The template to be treated as an image. </summary>
         protected PdfTemplate[] template = new PdfTemplate[1];
-    
+
         /// <summary> The alignment of the Image. </summary>
         protected int alignment;
-    
+
         /// <summary> Text that can be shown instead of the image. </summary>
         protected string alt;
-    
+
         /// <summary> This is the absolute X-position of the image. </summary>
         protected float absoluteX = float.NaN;
-    
+
         /// <summary> This is the absolute Y-position of the image. </summary>
         protected float absoluteY = float.NaN;
-    
+
         /// <summary> This is the width of the image without rotation. </summary>
         protected float plainWidth;
-    
+
         /// <summary> This is the width of the image without rotation. </summary>
         protected float plainHeight;
-    
+
         /// <summary> This is the scaled width of the image taking rotation into account. </summary>
         protected float scaledWidth;
-    
+
         /// <summary> This is the original height of the image taking rotation into account. </summary>
         protected float scaledHeight;
-    
+
         /**
         * The compression level of the content streams.
         * @since   2.1.3
@@ -191,16 +191,16 @@ namespace iTextSharp.text {
 
         /// <summary> This is the rotation of the image. </summary>
         protected float rotationRadians;
-    
+
         /// <summary> this is the colorspace of a jpeg-image. </summary>
         protected int colorspace = -1;
-    
+
         /// <summary> this is the bits per component of the raw image. It also flags a CCITT image.</summary>
         protected int bpc = 1;
-    
+
         /// <summary> this is the transparency information of the raw image</summary>
         protected int[] transparency;
-    
+
         // for the moment these variables are only used for Images in class Table
         // code contributed by Pelikan Stephan
         /** the indentation to the left. */
@@ -209,30 +209,30 @@ namespace iTextSharp.text {
         /** the indentation to the right. */
         protected float indentationRight = 0;
         // serial stamping
-    
+
         protected long mySerialId = GetSerialId();
-    
+
         static object serialId = 0L;
 
         /// <summary> Holds value of property dpiX. </summary>
         protected int dpiX = 0;
-    
+
         /// <summary> Holds value of property dpiY. </summary>
         protected int dpiY = 0;
-    
+
         protected bool mask = false;
-    
+
         protected Image imageMask;
-    
+
         /// <summary> Holds value of property interpolation. </summary>
         protected bool interpolation;
-    
+
         /// <summary> if the annotation is not null the image will be clickable. </summary>
         protected Annotation annotation = null;
 
         /// <summary> ICC Profile attached </summary>
         protected ICC_Profile profile = null;
-    
+
         /** Holds value of property deflated. */
         protected bool deflated = false;
 
@@ -267,11 +267,11 @@ namespace iTextSharp.text {
         * Holds value of property initialRotation.
         */
         private float initialRotation;
-        
+
         private PdfIndirectReference directReference;
 
         // constructors
-    
+
         /// <summary>
         /// Constructs an Image-object, using an url.
         /// </summary>
@@ -327,7 +327,7 @@ namespace iTextSharp.text {
             this.initialRotation = image.initialRotation;
             this.directReference = image.directReference;
         }
-    
+
         /// <summary>
         /// Gets an instance of an Image.
         /// </summary>
@@ -353,11 +353,11 @@ namespace iTextSharp.text {
                 int c2 = istr.ReadByte();
                 int c3 = istr.ReadByte();
                 int c4 = istr.ReadByte();
-			    // jbig2
-			    int c5 = istr.ReadByte();
-			    int c6 = istr.ReadByte();
-			    int c7 = istr.ReadByte();
-			    int c8 = istr.ReadByte();
+                // jbig2
+                int c5 = istr.ReadByte();
+                int c6 = istr.ReadByte();
+                int c7 = istr.ReadByte();
+                int c8 = istr.ReadByte();
                 istr.Close();
 
                 istr = null;
@@ -369,29 +369,29 @@ namespace iTextSharp.text {
                 if (c1 == 0xFF && c2 == 0xD8) {
                     return new Jpeg(url);
                 }
-			    if (c1 == 0x00 && c2 == 0x00 && c3 == 0x00 && c4 == 0x0c) {
-				    return new Jpeg2000(url);
-			    }
-			    if (c1 == 0xff && c2 == 0x4f && c3 == 0xff && c4 == 0x51) {
-				    return new Jpeg2000(url);
-			    }
+                if (c1 == 0x00 && c2 == 0x00 && c3 == 0x00 && c4 == 0x0c) {
+                   return new Jpeg2000(url);
+                }
+                if (c1 == 0xff && c2 == 0x4f && c3 == 0xff && c4 == 0x51) {
+                   return new Jpeg2000(url);
+                }
                 if (c1 == PngImage.PNGID[0] && c2 == PngImage.PNGID[1]
-                        && c3 == PngImage.PNGID[2] && c4 == PngImage.PNGID[3]) {
-                    Image img = PngImage.GetImage(url);
-                    return img;
+                      && c3 == PngImage.PNGID[2] && c4 == PngImage.PNGID[3]) {
+                   Image img = PngImage.GetImage(url);
+                   return img;
                 }
                 if (c1 == 0xD7 && c2 == 0xCD) {
-                    Image img = new ImgWMF(url);
-                    return img;
+                   Image img = new ImgWMF(url);
+                   return img;
                 }
                 if (c1 == 'B' && c2 == 'M') {
-                    Image img = BmpImage.GetImage(url);
-                    return img;
+                   Image img = BmpImage.GetImage(url);
+                   return img;
                 }
                 if ((c1 == 'M' && c2 == 'M' && c3 == 0 && c4 == 42)
-                        || (c1 == 'I' && c2 == 'I' && c3 == 42 && c4 == 0)) {
-                    RandomAccessFileOrArray ra = null;
-                    try {
+                      || (c1 == 'I' && c2 == 'I' && c3 == 42 && c4 == 0)) {
+                   RandomAccessFileOrArray ra = null;
+                   try {
                         if (url.IsFile) {
                             String file = url.LocalPath;
                             ra = new RandomAccessFileOrArray(file);
@@ -450,7 +450,7 @@ namespace iTextSharp.text {
             Image img = new ImgJBIG2(width, height, data, globals);
             return img;
         }
-        
+
         /// <summary>
         /// Gets an instance of an Image.
         /// </summary>
@@ -514,7 +514,7 @@ namespace iTextSharp.text {
             image.Save(ms, format);
             return GetInstance(ms.ToArray());
         }
-    
+
         /// <summary>
         /// Gets an instance of an Image from a System.Drwaing.Image.
         /// </summary>
@@ -533,7 +533,7 @@ namespace iTextSharp.text {
             if (forceBW) {
                 int byteWidth = (w / 8) + ((w & 7) != 0 ? 1 : 0);
                 byte[] pixelsByte = new byte[byteWidth * h];
-            
+
                 int index = 0;
                 int transColor = 1;
                 if (color != null) {
@@ -596,9 +596,9 @@ namespace iTextSharp.text {
             else {
                 byte[] pixelsByte = new byte[w * h * 3];
                 byte[] smask = null;
-            
+
                 int index = 0;
-                
+
                 int red = 255;
                 int green = 255;
                 int blue = 255;
@@ -670,7 +670,7 @@ namespace iTextSharp.text {
                 return img;
             }
         }
-    
+
         /// <summary>
         /// Gets an instance of an Image from a System.Drawing.Image.
         /// </summary>
@@ -683,7 +683,7 @@ namespace iTextSharp.text {
         public static Image GetInstance(System.Drawing.Image image, Color color) {
             return Image.GetInstance(image, color, false);
         }
-    
+
         /// <summary>
         /// Gets an instance of an Image.
         /// </summary>
@@ -692,7 +692,7 @@ namespace iTextSharp.text {
         public static Image GetInstance(string filename) {
             return GetInstance(Utilities.ToURL(filename));
         }
-    
+
         /// <summary>
         /// Gets an instance of an Image in raw mode.
         /// </summary>
@@ -705,13 +705,13 @@ namespace iTextSharp.text {
         public static Image GetInstance(int width, int height, int components, int bpc, byte[] data) {
             return Image.GetInstance(width, height, components, bpc, data, null);
         }
-    
+
         /**
         * Reuses an existing image.
         * @param ref the reference to the image dictionary
         * @throws BadElementException on error
         * @return the image
-        */    
+        */
         public static Image GetInstance(PRIndirectReference iref) {
             PdfDictionary dic = (PdfDictionary)PdfReader.GetPdfObjectRelease(iref);
             int width = ((PdfNumber)PdfReader.GetPdfObjectRelease(dic.Get(PdfName.WIDTH))).IntValue;
@@ -734,7 +734,7 @@ namespace iTextSharp.text {
             img.directReference = iref;
             return img;
         }
-        
+
         /// <summary>
         /// Gets an instance of an Image in raw mode.
         /// </summary>
@@ -743,7 +743,7 @@ namespace iTextSharp.text {
         public static Image GetInstance(PdfTemplate template) {
             return new ImgTemplate(template);
         }
-    
+
         /// <summary>
         /// Gets an instance of an Image in raw mode.
         /// </summary>
@@ -757,9 +757,9 @@ namespace iTextSharp.text {
         public static Image GetInstance(int width, int height, bool reverseBits, int typeCCITT, int parameters, byte[] data) {
             return Image.GetInstance(width, height, reverseBits, typeCCITT, parameters, data, null);
         }
-    
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
@@ -801,9 +801,9 @@ namespace iTextSharp.text {
             img.transparency = transparency;
             return img;
         }
-    
+
         // methods to set information
-    
+
         /// <summary>
         /// Sets the absolute position of the Image.
         /// </summary>
@@ -813,7 +813,7 @@ namespace iTextSharp.text {
             this.absoluteX = absoluteX;
             this.absoluteY = absoluteY;
         }
-    
+
         /// <summary>
         /// Scale the image to an absolute width and an absolute height.
         /// </summary>
@@ -827,7 +827,7 @@ namespace iTextSharp.text {
             scaledHeight = matrix[DY] - matrix[CY];
             WidthPercentage = 0;
         }
-    
+
         /// <summary>
         /// Scale the image to an absolute width.
         /// </summary>
@@ -839,7 +839,7 @@ namespace iTextSharp.text {
             scaledHeight = matrix[DY] - matrix[CY];
             WidthPercentage = 0;
         }
-    
+
         /// <summary>
         /// Scale the image to an absolute height.
         /// </summary>
@@ -851,7 +851,7 @@ namespace iTextSharp.text {
             scaledHeight = matrix[DY] - matrix[CY];
             WidthPercentage = 0;
         }
-    
+
         /// <summary>
         /// Scale the image to a certain percentage.
         /// </summary>
@@ -859,7 +859,7 @@ namespace iTextSharp.text {
         public void ScalePercent(float percent) {
             ScalePercent(percent, percent);
         }
-    
+
         /// <summary>
         /// Scale the width and height of an image to a certain percentage.
         /// </summary>
@@ -873,7 +873,7 @@ namespace iTextSharp.text {
             scaledHeight = matrix[DY] - matrix[CY];
             WidthPercentage = 0;
         }
-    
+
         /// <summary>
         /// Scales the image so that it fits a certain width and height.
         /// </summary>
@@ -886,7 +886,7 @@ namespace iTextSharp.text {
             ScalePercent(percentX < percentY ? percentX : percentY);
             WidthPercentage = 0;
         }
-    
+
         /**
         * Gets the current image rotation in radians.
         * @return the current image rotation in radians
@@ -915,7 +915,7 @@ namespace iTextSharp.text {
                 scaledHeight = matrix[DY] - matrix[CY];
             }
         }
-    
+
         /// <summary>
         /// Sets the rotation of the image in degrees.
         /// </summary>
@@ -925,7 +925,7 @@ namespace iTextSharp.text {
                 Rotation = (value / 180 * (float)Math.PI); //__IDS__
             }
         }
-    
+
         /// <summary>
         /// Get/set the annotation.
         /// </summary>
@@ -939,9 +939,9 @@ namespace iTextSharp.text {
                 this.annotation = value;
             }
         }
-    
+
         // methods to retrieve information
-    
+
         /// <summary>
         /// Gets the bpc for the image.
         /// </summary>
@@ -954,7 +954,7 @@ namespace iTextSharp.text {
                 return bpc;
             }
         }
-    
+
         /// <summary>
         /// Gets the raw data for the image.
         /// </summary>
@@ -967,7 +967,7 @@ namespace iTextSharp.text {
                 return rawData;
             }
         }
-    
+
         /// <summary>
         /// Get/set the template to be used as an image.
         /// </summary>
@@ -984,7 +984,7 @@ namespace iTextSharp.text {
                 this.template[0] = value;
             }
         }
-    
+
         /// <summary>
         /// Checks if the Images has to be added at an absolute position.
         /// </summary>
@@ -992,7 +992,7 @@ namespace iTextSharp.text {
         public bool HasAbsolutePosition() {
             return !float.IsNaN(absoluteY);
         }
-    
+
         /// <summary>
         /// Checks if the Images has to be added at an absolute X position.
         /// </summary>
@@ -1000,7 +1000,7 @@ namespace iTextSharp.text {
         public bool HasAbsoluteX() {
             return !float.IsNaN(absoluteX);
         }
-    
+
         /// <summary>
         /// Returns the absolute X position.
         /// </summary>
@@ -1010,7 +1010,7 @@ namespace iTextSharp.text {
                 return absoluteX;
             }
         }
-    
+
         /// <summary>
         /// Returns the absolute Y position.
         /// </summary>
@@ -1020,7 +1020,7 @@ namespace iTextSharp.text {
                 return absoluteY;
             }
         }
-    
+
         /// <summary>
         /// Returns the type.
         /// </summary>
@@ -1030,7 +1030,7 @@ namespace iTextSharp.text {
                 return type;
             }
         }
-    
+
         /**
         * @see com.lowagie.text.Element#isNestable()
         * @since   iText 2.0.8
@@ -1046,7 +1046,7 @@ namespace iTextSharp.text {
         public bool IsJpeg() {
             return type == Element.JPEG;
         }
-    
+
         /// <summary>
         /// Returns true if the image is a ImgRaw-object.
         /// </summary>
@@ -1062,7 +1062,7 @@ namespace iTextSharp.text {
         public bool IsImgTemplate() {
             return type == Element.IMGTEMPLATE;
         }
-    
+
         /// <summary>
         /// Gets the string-representation of the reference to the image.
         /// </summary>
@@ -1075,7 +1075,7 @@ namespace iTextSharp.text {
                 url = value;
             }
         }
-    
+
         /// <summary>
         /// Get/set the alignment for the image.
         /// </summary>
@@ -1089,7 +1089,7 @@ namespace iTextSharp.text {
                 this.alignment = value;
             }
         }
-    
+
         /// <summary>
         /// Get/set the alternative text for the image.
         /// </summary>
@@ -1103,7 +1103,7 @@ namespace iTextSharp.text {
                 this.alt = value;
             }
         }
-    
+
         /// <summary>
         /// Gets the scaled width of the image.
         /// </summary>
@@ -1113,7 +1113,7 @@ namespace iTextSharp.text {
                 return scaledWidth;
             }
         }
-    
+
         /// <summary>
         /// Gets the scaled height of the image.
         /// </summary>
@@ -1123,7 +1123,7 @@ namespace iTextSharp.text {
                 return scaledHeight;
             }
         }
-    
+
         /// <summary>
         /// Gets the colorspace for the image.
         /// </summary>
@@ -1136,7 +1136,7 @@ namespace iTextSharp.text {
                 return colorspace;
             }
         }
-    
+
         /// <summary>
         /// Returns the transformation matrix of the image.
         /// </summary>
@@ -1177,7 +1177,7 @@ namespace iTextSharp.text {
                 return matrix;
             }
         }
-    
+
         /// <summary>
         /// Returns the transparency.
         /// </summary>
@@ -1190,7 +1190,7 @@ namespace iTextSharp.text {
                 transparency = value;
             }
         }
-    
+
         /// <summary>
         /// Gets the plain width of the image.
         /// </summary>
@@ -1200,7 +1200,7 @@ namespace iTextSharp.text {
                 return plainWidth;
             }
         }
-    
+
         /// <summary>
         /// Gets the plain height of the image.
         /// </summary>
@@ -1210,7 +1210,7 @@ namespace iTextSharp.text {
                 return plainHeight;
             }
         }
-    
+
         /// <summary>
         /// generates new serial id
         /// </summary>
@@ -1220,7 +1220,7 @@ namespace iTextSharp.text {
                 return (long)serialId;
             }
         }
-    
+
         /// <summary>
         /// returns serial id for this object
         /// </summary>
@@ -1229,7 +1229,7 @@ namespace iTextSharp.text {
                 return mySerialId;
             }
         }
-    
+
         /// <summary>
         /// Gets the dots-per-inch in the X direction. Returns 0 if not available.
         /// </summary>
@@ -1239,7 +1239,7 @@ namespace iTextSharp.text {
                 return dpiX;
             }
         }
-    
+
         /// <summary>
         /// Gets the dots-per-inch in the Y direction. Returns 0 if not available.
         /// </summary>
@@ -1249,10 +1249,10 @@ namespace iTextSharp.text {
                 return dpiY;
             }
         }
-    
+
         /**
         * Sets the dots per inch value
-        * 
+        *
         * @param dpiX
         *            dpi for x coordinates
         * @param dpiY
@@ -1275,7 +1275,7 @@ namespace iTextSharp.text {
             }
             return colorspace == 1;
         }
-    
+
         /// <summary>
         /// Make this Image a mask.
         /// </summary>
@@ -1284,7 +1284,7 @@ namespace iTextSharp.text {
                 throw new DocumentException("This image can not be an image mask.");
             mask = true;
         }
-    
+
         /// <summary>
         /// Get/set the explicit masking.
         /// </summary>
@@ -1303,7 +1303,7 @@ namespace iTextSharp.text {
                 smask = (value.bpc > 1 && value.bpc <= 8);
             }
         }
-    
+
         /// <summary>
         /// Returns true if this Image is a mask.
         /// </summary>
@@ -1311,7 +1311,7 @@ namespace iTextSharp.text {
         public bool IsMask() {
             return mask;
         }
-    
+
         /// <summary>
         /// Inverts the meaning of the bits of a mask.
         /// </summary>
@@ -1324,7 +1324,7 @@ namespace iTextSharp.text {
                 return this.invert;
             }
         }
-    
+
         /// <summary>
         /// Sets the image interpolation. Image interpolation attempts to
         /// produce a smooth transition between adjacent sample values.
@@ -1338,10 +1338,10 @@ namespace iTextSharp.text {
                 return this.interpolation;
             }
         }
-    
+
         /** Tags this image with an ICC profile.
          * @param profile the profile
-         */    
+         */
         public ICC_Profile TagICC {
             get {
                 return profile;
@@ -1350,10 +1350,10 @@ namespace iTextSharp.text {
                 this.profile = value;
             }
         }
-    
+
         /** Checks is the image has an ICC profile.
          * @return the ICC profile or null
-         */    
+         */
         public bool HasICCProfile() {
             return (this.profile != null);
         }
@@ -1480,7 +1480,7 @@ namespace iTextSharp.text {
 
         /**
         * Replaces CalRGB and CalGray colorspaces with DeviceRGB and DeviceGray.
-        */    
+        */
         public void SimplifyColorspace() {
             if (additional == null)
                 return;
@@ -1505,7 +1505,7 @@ namespace iTextSharp.text {
             }
             additional.Put(PdfName.COLORSPACE, value);
         }
-        
+
         /**
         * Some image formats, like TIFF may present the images rotated that have
         * to be compensated.
