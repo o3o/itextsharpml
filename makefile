@@ -1,5 +1,5 @@
 NAME = itextsharpml.dll
-VERSION = 4.2.0
+VERSION = 4.3.0
 TARGET = library
 
 SRC = $(shell find iTextSharp/ -name "*.cs")

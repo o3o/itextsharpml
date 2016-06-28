@@ -7,7 +7,7 @@
 [assembly: System.Reflection.AssemblyCopyright("Copyright (C) 1999-2009 by Bruno Lowagie and Paulo Soares. All Rights Reserved.")]
 [assembly: System.Reflection.AssemblyTrademark("")]
 [assembly: System.Reflection.AssemblyCulture("")]
-[assembly: System.Reflection.AssemblyVersion("4.2.0")]
+[assembly: System.Reflection.AssemblyVersion("4.3.0")]
 [assembly: System.Reflection.AssemblyDelaySign(false)]
 [assembly: System.Reflection.AssemblyKeyFile("")]
 [assembly: System.Reflection.AssemblyKeyName("")]
