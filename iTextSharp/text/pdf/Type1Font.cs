@@ -5,7 +5,7 @@ using System.util;
 
 /*
  * $Id: Type1Font.cs,v 1.13 2008/05/13 11:25:23 psoares33 Exp $
- * 
+ *
  *
  * Copyright 2001, 2002 Paulo Soares
  *
@@ -61,7 +61,7 @@ namespace iTextSharp.text.pdf {
      */
     internal class Type1Font : BaseFont {
         /** The PFB file if the input was made with a <CODE>byte</CODE> array.
-         */    
+         */
         protected byte[] pfb;
         /** The Postscript font name.
          */
@@ -127,7 +127,7 @@ namespace iTextSharp.text.pdf {
         /** A variable.
          */
         private int StdVW = 80;
-    
+
         /** Represents the section CharMetrics in the AFM file. Each
         *  value of this array contains a <CODE>Object[4]</CODE> with an
         *  Integer, Integer, String and int[]. This is the code, width, name and char bbox.
@@ -151,7 +151,7 @@ namespace iTextSharp.text.pdf {
          *  They have to appear in the PFB file in this sequence.
          */
         private static readonly int[] PFB_TYPES = {1, 2, 1};
-    
+
         /** Creates a new Type1 font.
          * @param ttfAfm the AFM file if the input is made with a <CODE>byte</CODE> array
          * @param pfb the PFB file if the input is made with a <CODE>byte</CODE> array
@@ -268,7 +268,7 @@ namespace iTextSharp.text.pdf {
                 PdfEncodings.ConvertToBytes(" ", enc); // check if the encoding exists
             CreateEncoding();
         }
-    
+
         /** Gets the width from the font according to the <CODE>name</CODE> or,
          * if the <CODE>name</CODE> is null, meaning it is a symbolic font,
          * the char <CODE>c</CODE>.
@@ -290,7 +290,7 @@ namespace iTextSharp.text.pdf {
                 return (int)metrics[1];
             return 0;
         }
-    
+
         /** Gets the kerning between two Unicode characters. The characters
          * are converted to names and this names are used to find the kerning
          * pairs in the <CODE>Hashtable</CODE> <CODE>KernPairs</CODE>.
@@ -314,8 +314,8 @@ namespace iTextSharp.text.pdf {
             }
             return 0;
         }
-    
-    
+
+
         /** Reads the font metrics
          * @param rf the AFM file
          * @throws DocumentException the AFM file is invalid
@@ -402,7 +402,7 @@ namespace iTextSharp.text.pdf {
                     else if (ident.Equals("N"))
                         N = tokc.NextToken();
                     else if (ident.Equals("B")) {
-                        B = new int[]{int.Parse(tokc.NextToken()), 
+                        B = new int[]{int.Parse(tokc.NextToken()),
                                             int.Parse(tokc.NextToken()),
                                             int.Parse(tokc.NextToken()),
                                             int.Parse(tokc.NextToken())};
@@ -464,7 +464,7 @@ namespace iTextSharp.text.pdf {
                 throw new DocumentException("Missing EndKernPairs in " + fileName);
             rf.Close();
         }
-    
+
         /** If the embedded flag is <CODE>false</CODE> or if the font is
          *  one of the 14 built in types, it returns <CODE>null</CODE>,
          * otherwise the font is read and output in a PdfStream object.
@@ -516,7 +516,7 @@ namespace iTextSharp.text.pdf {
                 }
             }
         }
-    
+
         /** Generates the font descriptor for this font or <CODE>null</CODE> if it is
          * one of the 14 built in fonts.
          * @param fontStream the indirect reference to a PdfStream containing the font or <CODE>null</CODE>
@@ -546,10 +546,10 @@ namespace iTextSharp.text.pdf {
             if (Weight.Equals("Bold"))
                 flags |= 262144;
             dic.Put(PdfName.FLAGS, new PdfNumber(flags));
-            
+
             return dic;
         }
-    
+
         /** Generates the font dictionary for this font.
          * @return the PdfDictionary containing the font dictionary
          * @param firstChar the first valid character
@@ -574,7 +574,7 @@ namespace iTextSharp.text.pdf {
                 else {
                     PdfDictionary enc = new PdfDictionary(PdfName.ENCODING);
                     PdfArray dif = new PdfArray();
-                    bool gap = true;                
+                    bool gap = true;
                     for (int k = firstChar; k <= lastChar; ++k) {
                         if (shortTag[k] != 0) {
                             if (gap) {
@@ -606,7 +606,7 @@ namespace iTextSharp.text.pdf {
                 dic.Put(PdfName.FONTDESCRIPTOR, fontDescriptor);
             return dic;
         }
-    
+
         /** Outputs to the writer the font dictionaries and streams.
          * @param writer the writer for this document
          * @param ref the font indirect reference
@@ -641,7 +641,7 @@ namespace iTextSharp.text.pdf {
             pobj = GetFontBaseType(ind_font, firstChar, lastChar, shortTag);
             writer.AddToBody(pobj, piref);
         }
-    
+
         /** Gets the font parameter identified by <CODE>key</CODE>. Valid values
          * for <CODE>key</CODE> are <CODE>ASCENT</CODE>, <CODE>CAPHEIGHT</CODE>, <CODE>DESCENT</CODE>,
          * <CODE>ITALICANGLE</CODE>, <CODE>BBOXLLX</CODE>, <CODE>BBOXLLY</CODE>, <CODE>BBOXURX</CODE>
@@ -649,7 +649,7 @@ namespace iTextSharp.text.pdf {
          * @param key the parameter to be extracted
          * @param fontSize the font size in points
          * @return the parameter in points
-         */    
+         */
         public override float GetFontDescriptor(int key, float fontSize) {
             switch (key) {
                 case AWT_ASCENT:
@@ -681,7 +681,7 @@ namespace iTextSharp.text.pdf {
             }
             return 0;
         }
-    
+
         /** Gets the postscript font name.
          * @return the postscript font name
          */
@@ -693,7 +693,7 @@ namespace iTextSharp.text.pdf {
                 FontName = value;
             }
         }
-    
+
         /** Gets the full name of the font. If it is a True Type font
          * each array element will have {Platform ID, Platform Encoding ID,
          * Language ID, font name}. The interpretation of this values can be
@@ -707,7 +707,7 @@ namespace iTextSharp.text.pdf {
                 return new string[][]{new string[] {"", "", "", FullName}};
             }
         }
-    
+
         /** Gets all the entries of the names-table. If it is a True Type font
         * each array element will have {Name ID, Platform ID, Platform Encoding ID,
         * Language ID, font name}. The interpretation of this values can be
@@ -721,7 +721,7 @@ namespace iTextSharp.text.pdf {
                 return new string[][]{new string[]{"4", "", "", "", FullName}};
             }
         }
-        
+
         /** Gets the family name of the font. If it is a True Type font
          * each array element will have {Platform ID, Platform Encoding ID,
          * Language ID, font name}. The interpretation of this values can be
@@ -735,14 +735,14 @@ namespace iTextSharp.text.pdf {
                 return new string[][]{new string[] {"", "", "", FamilyName}};
             }
         }
-    
+
         /** Checks if the font has any kerning pairs.
         * @return <CODE>true</CODE> if the font has any kerning pairs
-        */    
+        */
         public override bool HasKernPairs() {
             return KernPairs.Count > 0;
         }
-        
+
         /**
         * Sets the kerning between two Unicode chars.
         * @param char1 the first char
@@ -777,7 +777,7 @@ namespace iTextSharp.text.pdf {
             KernPairs[first] = obj2;
             return true;
         }
-        
+
         protected override int[] GetRawCharBBox(int c, String name) {
             Object[] metrics;
             if (name == null) { // font specific

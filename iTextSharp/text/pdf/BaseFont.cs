@@ -14,74 +14,74 @@ namespace iTextSharp.text.pdf {
    public abstract class BaseFont {
       /** This is a possible value of a base 14 type 1 font */
       public const string COURIER = "Courier";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string COURIER_BOLD = "Courier-Bold";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string COURIER_OBLIQUE = "Courier-Oblique";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string COURIER_BOLDOBLIQUE = "Courier-BoldOblique";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string HELVETICA = "Helvetica";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string HELVETICA_BOLD = "Helvetica-Bold";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string HELVETICA_OBLIQUE = "Helvetica-Oblique";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string HELVETICA_BOLDOBLIQUE = "Helvetica-BoldOblique";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string SYMBOL = "Symbol";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string TIMES_ROMAN = "Times-Roman";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string TIMES_BOLD = "Times-Bold";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string TIMES_ITALIC = "Times-Italic";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string TIMES_BOLDITALIC = "Times-BoldItalic";
-    
+
       /** This is a possible value of a base 14 type 1 font */
       public const string ZAPFDINGBATS = "ZapfDingbats";
-    
+
       /** The maximum height above the baseline reached by glyphs in this
        * font, excluding the height of glyphs for accented characters.
-       */    
-      public const int ASCENT = 1;    
+       */
+      public const int ASCENT = 1;
       /** The y coordinate of the top of flat capital letters, measured from
        * the baseline.
-       */    
+       */
       public const int CAPHEIGHT = 2;
       /** The maximum depth below the baseline reached by glyphs in this
        * font. The value is a negative number.
-       */    
+       */
       public const int DESCENT = 3;
       /** The angle, expressed in degrees counterclockwise from the vertical,
        * of the dominant vertical strokes of the font. The value is
        * negative for fonts that slope to the right, as almost all italic fonts do.
-       */    
+       */
       public const int ITALICANGLE = 4;
       /** The lower left x glyph coordinate.
-       */    
+       */
       public const int BBOXLLX = 5;
       /** The lower left y glyph coordinate.
-       */    
+       */
       public const int BBOXLLY = 6;
       /** The upper right x glyph coordinate.
-       */    
+       */
       public const int BBOXURX = 7;
       /** The upper right y glyph coordinate.
-       */    
+       */
       public const int BBOXURY = 8;
       /** java.awt.Font property */
       public const int AWT_ASCENT = 9;
@@ -90,7 +90,7 @@ namespace iTextSharp.text.pdf {
       /** java.awt.Font property */
       public const int AWT_LEADING = 11;
       /** java.awt.Font property */
-      public const int AWT_MAXADVANCE = 12;    
+      public const int AWT_MAXADVANCE = 12;
       /**
        * The underline position. Usually a negative value.
        */
@@ -123,81 +123,81 @@ namespace iTextSharp.text.pdf {
        * The recommended vertical offset from the baseline for superscripts for this font.
        */
       public const int SUPERSCRIPT_OFFSET = 20;
-    
+
       /** The font is Type 1.
-       */    
+       */
       public const int FONT_TYPE_T1 = 0;
       /** The font is True Type with a standard encoding.
-       */    
+       */
       public const int FONT_TYPE_TT = 1;
       /** The font is CJK.
-       */    
+       */
       public const int FONT_TYPE_CJK = 2;
       /** The font is True Type with a Unicode encoding.
-       */    
+       */
       public const int FONT_TYPE_TTUNI = 3;
       /** A font already inside the document.
-       */    
+       */
       public const int FONT_TYPE_DOCUMENT = 4;
       /** A Type3 font.
-       */    
+       */
       public const int FONT_TYPE_T3 = 5;
 
-      /** 
+      /**
           The Unicode encoding with horizontal writing.
-      */    
+      */
       public const string IDENTITY_H = "Identity-H";
-      /** 
+      /**
           The Unicode encoding with vertical writing.
-      */    
+      */
       public const string IDENTITY_V = "Identity-V";
-    
-      /** A possible encoding. */    
+
+      /** A possible encoding. */
       public const string CP1250 = "Cp1250";
-    
-      /** A possible encoding. */    
+
+      /** A possible encoding. */
       public const string CP1252 = "Cp1252";
-    
-      /** A possible encoding. */    
+
+      /** A possible encoding. */
       public const string CP1257 = "Cp1257";
-    
-      /** A possible encoding. */    
+
+      /** A possible encoding. */
       public const string WINANSI = "Cp1252";
-    
-      /** A possible encoding. */    
+
+      /** A possible encoding. */
       public const string MACROMAN = "MacRoman";
-    
+
       public static readonly int[] CHAR_RANGE_LATIN = {0, 0x17f, 0x2000, 0x206f, 0x20a0, 0x20cf, 0xfb00, 0xfb06};
       public static readonly int[] CHAR_RANGE_ARABIC = {0, 0x7f, 0x0600, 0x067f, 0x20a0, 0x20cf, 0xfb50, 0xfbff, 0xfe70, 0xfeff};
       public static readonly int[] CHAR_RANGE_HEBREW = {0, 0x7f, 0x0590, 0x05ff, 0x20a0, 0x20cf, 0xfb1d, 0xfb4f};
       public static readonly int[] CHAR_RANGE_CYRILLIC = {0, 0x7f, 0x0400, 0x052f, 0x2000, 0x206f, 0x20a0, 0x20cf};
-    
+
       /** if the font has to be embedded */
       public const bool EMBEDDED = true;
-    
+
       /** if the font doesn't have to be embedded */
       public const bool NOT_EMBEDDED = false;
       /** if the font has to be cached */
       public const bool CACHED = true;
       /** if the font doesn't have to be cached */
       public const bool NOT_CACHED = false;
-    
-      /** The path to the font resources. */    
+
+      /** The path to the font resources. */
       public const string RESOURCE_PATH = "iTextSharp.text.pdf.fonts.";
-      /** The fake CID code that represents a newline. */    
+      /** The fake CID code that represents a newline. */
       public const char CID_NEWLINE = '\u7fff';
 
       protected ArrayList subsetRanges;
 
       /** The font type.
-       */    
+       */
       internal int fontType;
       /** a not defined character in a custom PDF encoding */
       public const string notdef = ".notdef";
-    
+
       /** table of characters widths for this encoding */
       protected int[] widths = new int[256];
-    
+
       /** encoding names */
       protected string[] differences = new string[256];
       /** same as differences but with the unicode codes */
@@ -205,10 +205,10 @@ namespace iTextSharp.text.pdf {
       protected int[][] charBBoxes = new int[256][];
       /** encoding used with this font */
       protected string encoding;
-    
+
       /** true if the font is to be embedded in the PDF */
       protected bool embedded;
-    
+
       /**
        * The compression level for the font stream.
        * @since   2.1.3
@@ -221,28 +221,28 @@ namespace iTextSharp.text.pdf {
        * the font, not to the expected char name.
        */
       protected bool fontSpecific = true;
-    
+
       /** cache for the fonts already used. */
       protected static Hashtable fontCache = new Hashtable();
-    
+
       /** list of the 14 built in fonts. */
       protected static Hashtable BuiltinFonts14 = new Hashtable();
-    
+
       /** Forces the output of the width array. Only matters for the 14
        * built-in fonts.
        */
       protected bool forceWidthsOutput = false;
-    
+
       /** Converts <CODE>char</CODE> directly to <CODE>byte</CODE>
        * by casting.
        */
       protected bool directTextToByte = false;
-    
+
       /** Indicates if all the glyphs and widths for that particular
        * encoding should be included in the document.
        */
       protected bool subset = true;
-    
+
       protected bool fastWinansi = false;
 
       /**
@@ -271,12 +271,12 @@ namespace iTextSharp.text.pdf {
          BuiltinFonts14.Add(TIMES_ITALIC, PdfName.TIMES_ITALIC);
          BuiltinFonts14.Add(ZAPFDINGBATS, PdfName.ZAPFDINGBATS);
       }
-    
+
       /** Generates the PDF stream with the Type1 and Truetype fonts returning
        * a PdfStream.
        */
       internal class StreamFont : PdfStream {
-        
+
          /** Generates the PDF stream with the Type1 and Truetype fonts returning
           * a PdfStream.
           * @param contents the content of the stream
@@ -293,7 +293,7 @@ namespace iTextSharp.text.pdf {
             }
             FlateCompress(compressionLevel);
          }
-        
+
          /**
           * Generates the PDF stream for a font.
           * @param contents the content of a stream
@@ -310,20 +310,20 @@ namespace iTextSharp.text.pdf {
             FlateCompress(compressionLevel);
          }
       }
-    
+
       /**
        *Creates new BaseFont
        */
       protected BaseFont() {
       }
-    
+
       /**
        * Creates a new font. This will always be the default Helvetica font (not embedded).
        * This method is introduced because Helvetica is used in many examples.
        * @return  a BaseFont object (Helvetica, Winansi, not embedded)
        * @throws  IOException         This shouldn't occur ever
        * @throws  DocumentException   This shouldn't occur ever
-       * @since   2.1.1 
+       * @since   2.1.1
        */
       public static BaseFont CreateFont() {
          return CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.NOT_EMBEDDED);
@@ -341,7 +341,7 @@ namespace iTextSharp.text.pdf {
          The fonts are cached and if they already exist they are extracted from the cache,
          not parsed again.
          <P>
-         Besides the common encodings described by name, custom encodings 
+         Besides the common encodings described by name, custom encodings
          can also be made. These encodings will only work for the single byte fonts
          Type1 and TrueType. The encoding string starts with a '#'
          followed by "simple" or "full". If "simple" there is a decimal for the first character position and then a list
@@ -380,7 +380,7 @@ namespace iTextSharp.text.pdf {
       public static BaseFont CreateFont(String name, String encoding, bool embedded) {
          return CreateFont(name, encoding, embedded, true, null, null, false);
       }
-      
+
       /**
        * Creates a new font. This font can be one of the 14 built in types,
        * a Type1 font referred to by an AFM or PFM file, a TrueType font (simple or collection) or a CJK font from the
@@ -393,7 +393,7 @@ namespace iTextSharp.text.pdf {
        * The fonts are cached and if they already exist they are extracted from the cache,
        * not parsed again.
        * <P>
-       * Besides the common encodings described by name, custom encodings 
+       * Besides the common encodings described by name, custom encodings
        * can also be made. These encodings will only work for the single byte fonts
        * Type1 and TrueType. The encoding string starts with a '#'
        * followed by "simple" or "full". If "simple" there is a decimal for the first character position and then a list
@@ -434,7 +434,7 @@ namespace iTextSharp.text.pdf {
       public static BaseFont CreateFont(String name, String encoding, bool embedded, bool forceRead) {
          return CreateFont(name, encoding, embedded, true, null, null, forceRead);
       }
-        
+
       /** Creates a new font. This font can be one of the 14 built in types,
        * a Type1 font referred to by an AFM or PFM file, a TrueType font (simple or collection) or a CJK font from the
        * Adobe Asian Font Pack. TrueType fonts and CJK fonts can have an optional style modifier
@@ -448,7 +448,7 @@ namespace iTextSharp.text.pdf {
        * read from them instead of the name. A name is still required to identify
        * the font type.
        * <P>
-       * Besides the common encodings described by name, custom encodings 
+       * Besides the common encodings described by name, custom encodings
        * can also be made. These encodings will only work for the single byte fonts
        * Type1 and TrueType. The encoding string starts with a '#'
        * followed by "simple" or "full". If "simple" there is a decimal for the first character position and then a list
@@ -488,7 +488,7 @@ namespace iTextSharp.text.pdf {
       public static BaseFont CreateFont(String name, String encoding, bool embedded, bool cached, byte[] ttfAfm, byte[] pfb) {
          return CreateFont(name, encoding, embedded, cached, ttfAfm, pfb, false);
       }
-        
+
       /** Creates a new font. This font can be one of the 14 built in types,
        * a Type1 font referred to by an AFM or PFM file, a TrueType font (simple or collection) or a CJK font from the
        * Adobe Asian Font Pack. TrueType fonts and CJK fonts can have an optional style modifier
@@ -502,7 +502,7 @@ namespace iTextSharp.text.pdf {
        * read from them instead of the name. A name is still required to identify
        * the font type.
        * <P>
-       * Besides the common encodings described by name, custom encodings 
+       * Besides the common encodings described by name, custom encodings
        * can also be made. These encodings will only work for the single byte fonts
        * Type1 and TrueType. The encoding string starts with a '#'
        * followed by "simple" or "full". If "simple" there is a decimal for the first character position and then a list
@@ -545,7 +545,7 @@ namespace iTextSharp.text.pdf {
       public static BaseFont CreateFont(String name, String encoding, bool embedded, bool cached, byte[] ttfAfm, byte[] pfb, bool noThrow) {
          return CreateFont(name, encoding, embedded, cached, ttfAfm, pfb, false, false);
       }
-        
+
       /** Creates a new font. This font can be one of the 14 built in types,
        * a Type1 font referred to by an AFM or PFM file, a TrueType font (simple or collection) or a CJK font from the
        * Adobe Asian Font Pack. TrueType fonts and CJK fonts can have an optional style modifier
@@ -559,7 +559,7 @@ namespace iTextSharp.text.pdf {
        * read from them instead of the name. A name is still required to identify
        * the font type.
        * <P>
-       * Besides the common encodings described by name, custom encodings 
+       * Besides the common encodings described by name, custom encodings
        * can also be made. These encodings will only work for the single byte fonts
        * Type1 and TrueType. The encoding string starts with a '#'
        * followed by "simple" or "full". If "simple" there is a decimal for the first character position and then a list
@@ -647,17 +647,17 @@ namespace iTextSharp.text.pdf {
          }
          return fontBuilt;
       }
-    
+
       /**
        * Creates a font based on an existing document font. The created font font may not
        * behave as expected, depending on the encoding or subset.
        * @param fontRef the reference to the document font
        * @return the font
-       */    
+       */
       public static BaseFont CreateFont(PRIndirectReference fontRef) {
          return new DocumentFont(fontRef);
       }
-        
+
       /**
        * Gets the name without the modifiers Bold, Italic or BoldItalic.
        * @param name the full name of the font
@@ -673,7 +673,7 @@ namespace iTextSharp.text.pdf {
          else
             return name;
       }
-    
+
       /**
        * Normalize the encoding names. "winansi" is changed to "Cp1252" and
        * "macroman" is changed to "MacRoman".
@@ -692,7 +692,7 @@ namespace iTextSharp.text.pdf {
             return MACROMAN;
          return enc;
       }
-    
+
       /**
        * Creates the <CODE>widths</CODE> and the <CODE>differences</CODE> arrays
        * @throws UnsupportedEncodingException the encoding is not supported
@@ -773,7 +773,7 @@ namespace iTextSharp.text.pdf {
             }
          }
       }
-    
+
       /**
        * Gets the width from the font according to the Unicode char <CODE>c</CODE>
        * or the <CODE>name</CODE>. If the <CODE>name</CODE> is null it's a symbolic font.
@@ -782,7 +782,7 @@ namespace iTextSharp.text.pdf {
        * @return the width of the char
        */
       internal abstract int GetRawWidth(int c, string name);
-    
+
       /**
        * Gets the kerning between two Unicode chars.
        * @param char1 the first char
@@ -790,7 +790,7 @@ namespace iTextSharp.text.pdf {
        * @return the kerning to be applied
        */
       public abstract int GetKerning(int char1, int char2);
-    
+
       /**
        * Sets the kerning between two Unicode chars.
        * @param char1 the first char
@@ -820,7 +820,7 @@ namespace iTextSharp.text.pdf {
             return total;
          }
       }
-    
+
       /**
        * Gets the width of a <CODE>string</CODE> in normalized 1000 units.
        * @param text the <CODE>string</CODE> to get the witdth of
@@ -846,7 +846,7 @@ namespace iTextSharp.text.pdf {
          }
          return total;
       }
-    
+
       /**
        * Gets the descent of a <CODE>String</CODE> in normalized 1000 units. The descent will always be
        * less than or equal to zero even if all the characters have an higher descent.
@@ -863,7 +863,7 @@ namespace iTextSharp.text.pdf {
          }
          return min;
       }
-            
+
       /**
        * Gets the ascent of a <CODE>String</CODE> in normalized 1000 units. The ascent will always be
        * greater than or equal to zero even if all the characters have a lower ascent.
@@ -892,7 +892,7 @@ namespace iTextSharp.text.pdf {
       {
          return (float)GetDescent(text) * 0.001f * fontSize;
       }
-            
+
       /**
        * Gets the ascent of a <CODE>String</CODE> in points. The ascent will always be
        * greater than or equal to zero even if all the characters have a lower ascent.
@@ -904,7 +904,7 @@ namespace iTextSharp.text.pdf {
       {
          return (float)GetAscent(text) * 0.001f * fontSize;
       }
-        
+
       /**
        * Gets the width of a <CODE>String</CODE> in points taking kerning
        * into account.
@@ -924,7 +924,7 @@ namespace iTextSharp.text.pdf {
          }
          return size + kern * 0.001f * fontSize;
       }
-        
+
       /**
        * Gets the width of a <CODE>string</CODE> in points.
        * @param text the <CODE>string</CODE> to get the witdth of
@@ -934,7 +934,7 @@ namespace iTextSharp.text.pdf {
       public float GetWidthPoint(string text, float fontSize) {
          return (float)GetWidth(text) * 0.001f * fontSize;
       }
-    
+
       /**
        * Gets the width of a <CODE>char</CODE> in points.
        * @param char1 the <CODE>char</CODE> to get the witdth of
@@ -944,7 +944,7 @@ namespace iTextSharp.text.pdf {
       public float GetWidthPoint(int char1, float fontSize) {
          return GetWidth(char1) * 0.001f * fontSize;
       }
-    
+
       /**
        * Converts a <CODE>string</CODE> to a </CODE>byte</CODE> array according
        * to the font's encoding.
@@ -973,7 +973,7 @@ namespace iTextSharp.text.pdf {
          }
          return PdfEncodings.ConvertToBytes(text, encoding);
       }
-    
+
       /**
        * Converts a <CODE>char</CODE> to a </CODE>byte</CODE> array according
        * to the font's encoding.
@@ -991,7 +991,7 @@ namespace iTextSharp.text.pdf {
          }
          return PdfEncodings.ConvertToBytes((char)char1, encoding);
       }
-        
+
       /** Outputs to the writer the font dictionaries and streams.
        * @param writer the writer for this document
        * @param ref the font indirect reference
@@ -1000,7 +1000,7 @@ namespace iTextSharp.text.pdf {
        * @throws DocumentException error in generating the object
        */
       internal abstract void WriteFont(PdfWriter writer, PdfIndirectReference piRef, Object[] oParams);
-    
+
       /**
        * Returns a PdfStream object with the full font program (if possible).
        * This method will return null for some types of fonts (CJKFont, Type3Font)
@@ -1018,7 +1018,7 @@ namespace iTextSharp.text.pdf {
             return encoding;
          }
       }
-    
+
       /** Gets the font parameter identified by <CODE>key</CODE>. Valid values
        * for <CODE>key</CODE> are <CODE>ASCENT</CODE>, <CODE>CAPHEIGHT</CODE>, <CODE>DESCENT</CODE>,
        * <CODE>ITALICANGLE</CODE>, <CODE>BBOXLLX</CODE>, <CODE>BBOXLLY</CODE>, <CODE>BBOXURX</CODE>
@@ -1028,7 +1028,7 @@ namespace iTextSharp.text.pdf {
        * @return the parameter in points
        */
       public abstract float GetFontDescriptor(int key, float fontSize);
-    
+
       /** Gets the font type. The font types can be: FONT_TYPE_T1,
        * FONT_TYPE_TT, FONT_TYPE_CJK and FONT_TYPE_TTUNI.
        * @return the font type
@@ -1042,21 +1042,21 @@ namespace iTextSharp.text.pdf {
             fontType = value;
          }
       }
-    
+
       /** Gets the embedded flag.
        * @return <CODE>true</CODE> if the font is embedded.
        */
       public bool IsEmbedded() {
          return embedded;
       }
-    
+
       /** Gets the symbolic flag of the font.
        * @return <CODE>true</CODE> if the font is symbolic
        */
       public bool IsFontSpecific() {
          return fontSpecific;
       }
-    
+
       /** Creates a unique subset prefix to be added to the font name when the font is embedded and subset.
        * @return the subset prefix
        */
@@ -1069,7 +1069,7 @@ namespace iTextSharp.text.pdf {
          s[6] = '+';
          return new String(s);
       }
-    
+
       /** Gets the Unicode character corresponding to the byte output to the pdf stream.
        * @param index the byte index
        * @return the Unicode character
@@ -1077,7 +1077,7 @@ namespace iTextSharp.text.pdf {
       internal char GetUnicodeDifferences(int index) {
          return unicodeDifferences[index];
       }
-    
+
       /** Gets the postscript font name.
        * @return the postscript font name
        */
@@ -1085,7 +1085,7 @@ namespace iTextSharp.text.pdf {
          get;
          set;
       }
-    
+
       /** Gets the full name of the font. If it is a True Type font
        * each array element will have {Platform ID, Platform Encoding ID,
        * Language ID, font name}. The interpretation of this values can be
@@ -1097,7 +1097,7 @@ namespace iTextSharp.text.pdf {
       public abstract string[][] FullFontName {
          get;
       }
-    
+
       /** Gets all the entries of the names-table. If it is a True Type font
        * each array element will have {Name ID, Platform ID, Platform Encoding ID,
        * Language ID, font name}. The interpretation of this values can be
@@ -1122,7 +1122,7 @@ namespace iTextSharp.text.pdf {
        * @throws DocumentException on error
        * @throws IOException on error
        * @return the full name of the font
-       */    
+       */
       public static string[][] GetFullFontName(string name, string encoding, byte[] ttfAfm) {
          string nameBase = GetBaseName(name);
          BaseFont fontBuilt = null;
@@ -1132,7 +1132,7 @@ namespace iTextSharp.text.pdf {
             fontBuilt = CreateFont(name, encoding, false, false, ttfAfm, null);
          return fontBuilt.FullFontName;
       }
-    
+
       /** Gets all the names from the font. Only the required tables are read.
        * @param name the name of the font
        * @param encoding the encoding of the font
@@ -1140,7 +1140,7 @@ namespace iTextSharp.text.pdf {
        * @throws DocumentException on error
        * @throws IOException on error
        * @return an array of Object[] built with {getPostscriptFontName(), GetFamilyFontName(), GetFullFontName()}
-       */    
+       */
       public static Object[] GetAllFontNames(String name, String encoding, byte[] ttfAfm) {
          String nameBase = GetBaseName(name);
          BaseFont fontBuilt = null;
@@ -1168,7 +1168,7 @@ namespace iTextSharp.text.pdf {
             fontBuilt = CreateFont(name, encoding, false, false, ttfAfm, null);
          return fontBuilt.AllNameEntries;
       }
-        
+
       /** Gets the family name of the font. If it is a True Type font
        * each array element will have {Platform ID, Platform Encoding ID,
        * Language ID, font name}. The interpretation of this values can be
@@ -1180,7 +1180,7 @@ namespace iTextSharp.text.pdf {
       public abstract string[][] FamilyFontName {
          get;
       }
-    
+
       /** Gets the code pages supported by the font. This has only meaning
        * with True Type fonts.
        * @return the code pages supported by the font
@@ -1190,14 +1190,14 @@ namespace iTextSharp.text.pdf {
             return new string[0];
          }
       }
-    
+
       /** Enumerates the postscript font names present inside a
        * True Type Collection.
        * @param ttcFile the file name of the font
        * @throws DocumentException on error
        * @throws IOException on error
        * @return the postscript font names
-       */    
+       */
       public static string[] EnumerateTTCNames(string ttcFile) {
          return new EnumerateTTC(ttcFile).Names;
       }
@@ -1208,14 +1208,14 @@ namespace iTextSharp.text.pdf {
        * @throws DocumentException on error
        * @throws IOException on error
        * @return the postscript font names
-       */    
+       */
       public static string[] EnumerateTTCNames(byte[] ttcArray) {
          return new EnumerateTTC(ttcArray).Names;
       }
-    
+
       /** Gets the font width array.
        * @return the font width array
-       */    
+       */
       public int[] Widths {
          get {
             return widths;
@@ -1224,7 +1224,7 @@ namespace iTextSharp.text.pdf {
 
       /** Gets the array with the names of the characters.
        * @return the array with the names of the characters
-       */    
+       */
       public string[] Differences {
          get {
             return differences;
@@ -1233,13 +1233,13 @@ namespace iTextSharp.text.pdf {
 
       /** Gets the array with the unicode characters.
        * @return the array with the unicode characters
-       */    
+       */
       public char[] UnicodeDifferences {
          get {
             return unicodeDifferences;
          }
       }
-    
+
       /** Set to <CODE>true</CODE> to force the generation of the
        * widths array.
        * @param forceWidthsOutput <CODE>true</CODE> to force the generation of the
@@ -1253,7 +1253,7 @@ namespace iTextSharp.text.pdf {
             return forceWidthsOutput;
          }
       }
-    
+
       /** Sets the conversion of <CODE>char</CODE> directly to <CODE>byte</CODE>
        * by casting. This is a low level feature to put the bytes directly in
        * the content stream without passing through string.GetBytes().
@@ -1267,7 +1267,7 @@ namespace iTextSharp.text.pdf {
             return directTextToByte;
          }
       }
-    
+
       /** Indicates if all the glyphs and widths for that particular
        * encoding should be included in the document. When set to <CODE>true</CODE>
        * only the glyphs used will be included in the font. When set to <CODE>false</CODE>
@@ -1299,18 +1299,19 @@ namespace iTextSharp.text.pdf {
        * @param key the name of the resource
        * @return the <CODE>Stream</CODE> to get the resource or
        * <CODE>null</CODE> if not found
-       */    
+       */
       public static Stream GetResourceStream(string key) {
          Stream istr = null;
          // Try to use resource loader to load the properties file.
          try {
             Assembly assm = Assembly.GetExecutingAssembly();
             istr = assm.GetManifestResourceStream(key);
+         } catch {
          }
-         catch {
-         }
-         if (istr != null)
+         if (istr != null) {
             return istr;
+         }
+
          for (int k = 0; k < resourceSearch.Count; ++k) {
             object obj = resourceSearch[k];
             try {
@@ -1348,49 +1349,49 @@ namespace iTextSharp.text.pdf {
 
          return istr;
       }
-    
+
       /** Gets the Unicode equivalent to a CID.
-       * The (inexistent) CID <FF00> is translated as '\n'. 
+       * The (inexistent) CID <FF00> is translated as '\n'.
        * It has only meaning with CJK fonts with Identity encoding.
        * @param c the CID code
        * @return the Unicode equivalent
-       */    
+       */
       public virtual int GetUnicodeEquivalent(int c) {
          return c;
       }
-    
+
       /** Gets the CID code given an Unicode.
        * It has only meaning with CJK fonts.
        * @param c the Unicode
        * @return the CID equivalent
-       */    
+       */
       public virtual int GetCidCode(int c) {
          return c;
       }
 
       /** Checks if the font has any kerning pairs.
        * @return <CODE>true</CODE> if the font has any kerning pairs
-       */    
+       */
       public abstract bool HasKernPairs();
-        
+
       /**
        * Checks if a character exists in this font.
        * @param c the character to check
        * @return <CODE>true</CODE> if the character has a glyph,
        * <CODE>false</CODE> otherwise
-       */    
+       */
       public virtual bool CharExists(int c) {
          byte[] b = ConvertToBytes(c);
          return b.Length > 0;
       }
-        
+
       /**
        * Sets the character advance.
        * @param c the character
        * @param advance the character advance normalized to 1000 units
        * @return <CODE>true</CODE> if the advance was set,
        * <CODE>false</CODE> otherwise
-       */    
+       */
       public virtual bool SetCharAdvance(int c, int advance) {
          byte[] b = ConvertToBytes(c);
          if (b.Length == 0)
@@ -1398,7 +1399,7 @@ namespace iTextSharp.text.pdf {
          widths[0xff & b[0]] = advance;
          return true;
       }
-        
+
       private static void AddFont(PRIndirectReference fontRef, IntHashtable hits, ArrayList fonts) {
          PdfObject obj = PdfReader.GetPdfObject(fontRef);
          if (obj == null || !obj.IsDictionary())
@@ -1411,7 +1412,7 @@ namespace iTextSharp.text.pdf {
          fonts.Add(new Object[]{PdfName.DecodeName(name.ToString()), fontRef});
          hits[fontRef.Number] = 1;
       }
-        
+
       private static void RecourseFonts(PdfDictionary page, IntHashtable hits, ArrayList fonts, int level) {
          ++level;
          if (level > 50) // in case we have an endless loop
@@ -1422,7 +1423,7 @@ namespace iTextSharp.text.pdf {
          PdfDictionary font = resources.GetAsDict(PdfName.FONT);
          if (font != null) {
             foreach (PdfName key in font.Keys) {
-               PdfObject ft = font.Get(key);        
+               PdfObject ft = font.Get(key);
                if (ft == null || !ft.IsIndirect())
                   continue;
                int hit = ((PRIndirectReference)ft).Number;
@@ -1438,14 +1439,14 @@ namespace iTextSharp.text.pdf {
             }
          }
       }
-        
+
       /**
        * Gets a list of all document fonts. Each element of the <CODE>ArrayList</CODE>
        * contains a <CODE>Object[]{String,PRIndirectReference}</CODE> with the font name
        * and the indirect reference to it.
        * @param reader the document where the fonts are to be listed from
        * @return the list of fonts and references
-       */    
+       */
       public static ArrayList GetDocumentFonts(PdfReader reader) {
          IntHashtable hits = new IntHashtable();
          ArrayList fonts = new ArrayList();
@@ -1454,7 +1455,7 @@ namespace iTextSharp.text.pdf {
             RecourseFonts(reader.GetPageN(k), hits, fonts, 1);
          return fonts;
       }
-        
+
       /**
        * Gets a list of the document fonts in a particular page. Each element of the <CODE>ArrayList</CODE>
        * contains a <CODE>Object[]{String,PRIndirectReference}</CODE> with the font name
@@ -1462,14 +1463,14 @@ namespace iTextSharp.text.pdf {
        * @param reader the document where the fonts are to be listed from
        * @param page the page to list the fonts from
        * @return the list of fonts and references
-       */    
+       */
       public static ArrayList GetDocumentFonts(PdfReader reader, int page) {
          IntHashtable hits = new IntHashtable();
          ArrayList fonts = new ArrayList();
          RecourseFonts(reader.GetPageN(page), hits, fonts, 1);
          return fonts;
       }
-        
+
       /**
        * Gets the smallest box enclosing the character contours. It will return
        * <CODE>null</CODE> if the font has not the information or the character has no
@@ -1478,7 +1479,7 @@ namespace iTextSharp.text.pdf {
        * @param c the character to get the contour bounding box from
        * @return an array of four floats with the bounding box in the format [llx,lly,urx,ury] or
        * <code>null</code>
-       */    
+       */
       public virtual int[] GetCharBBox(int c) {
          byte[] b = ConvertToBytes(c);
          if (b.Length == 0)
@@ -1486,7 +1487,7 @@ namespace iTextSharp.text.pdf {
          else
             return charBBoxes[b[0] & 0xff];
       }
-        
+
       protected abstract int[] GetRawCharBBox(int c, String name);
 
       /**
@@ -1495,7 +1496,7 @@ namespace iTextSharp.text.pdf {
        * advance for those characters. This method makes those character to have zero
        * width advance and work correctly in the iText Arabic shaping and reordering
        * context.
-       */    
+       */
       public void CorrectArabicAdvance() {
          for (char c = '\u064b'; c <= '\u0658'; ++c)
             SetCharAdvance(c, 0);
