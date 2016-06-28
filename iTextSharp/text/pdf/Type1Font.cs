@@ -177,7 +177,7 @@ namespace iTextSharp.text.pdf {
                 builtinFont = true;
                 byte[] buf = new byte[1024];
                 try {
-                    istr = GetResourceStream(RESOURCE_PATH + afmFile + ".afm");
+                    istr = GetResourceStream(afmFile + ".afm");
                     if (istr == null) {
                         Console.Error.WriteLine(afmFile + " not found as resource.");
                         throw new DocumentException(afmFile + " not found as resource.");

@@ -10,7 +10,8 @@ SRC += AssemblyInfo.cs Contracts.cs
 REFS = System.Data.dll System.Drawing.dll
 REFS_FLAG = $(addprefix -r:, $(REFS))
 #PKG_FLAG +=-pkg:gtk-sharp-2.0
-RES_OPT = -res:iTextSharp/text/pdf/fonts/Courier.afm \
+RES_OPT = \
+	-res:iTextSharp/text/pdf/fonts/Courier.afm \
 	-res:iTextSharp/text/pdf/fonts/Courier-Bold.afm \
 	-res:iTextSharp/text/pdf/fonts/Courier-BoldOblique.afm \
 	-res:iTextSharp/text/pdf/fonts/Courier-Oblique.afm \
@@ -48,7 +49,7 @@ REFS_TEST += nunitlite.dll
 REFS_TEST += nunit.framework.dll
 REFS_TEST += NSubstitute.dll
 REFS_FLAG_TEST = $(addprefix -r:, $(REFS_TEST))
-	PKG_FLAG_TEST = $(PKG_FLAG)
+PKG_FLAG_TEST = $(PKG_FLAG)
 
 ###############
 # Common part #
@@ -68,7 +69,7 @@ BASE_NAME = $(basename $(NAME))
 CSCFLAGS += -nologo
 CSCFLAGS += -target:$(TARGET)
 CSCFLAGS += -lib:$(BIN)
-	CSCFLAGS += $(RES_OPT)
+CSCFLAGS += $(RES_OPT)
 
 NAME_TEST = test-runner
 CSCFLAGS_TEST += -debug -nologo -target:exe
@@ -76,7 +77,7 @@ CSCFLAGS_TEST += -lib:$(BIN)
 
 NUNIT_OPT =--noheader --noresult
 
-PUBLISH_DIR = $(CS_DIR)/lib/Microline/$(BASE_NAME)/$(VERSION)
+PUBLISH_DIR = $(CS_DIR)/lib/$(BASE_NAME)/$(VERSION)
 ZIP_PREFIX = $(BASE_NAME)-$(VERSION)
 
 .PHONY: all clean clobber test testv ver var pkgall pkg pkgtar pkgsrc publish
@@ -150,7 +151,7 @@ clobber: clean
 
 var:
 	@echo NAME:$(NAME)
-	@echo SRC:$(SRC)
+# @echo SRC:$(SRC)
 	@echo 
 	@echo REFS: $(REFS)
 	@echo REFS_FLAG: $(REFS_FLAG)
@@ -158,7 +159,7 @@ var:
 	@echo 
 	@echo CSCFLAGS: $(CSCFLAGS)
 	@echo 
-	@echo SRC_TEST:$(SRC_TEST)
+#@echo SRC_TEST:$(SRC_TEST)
 	@echo 
 	@echo REFS_TEST: $(REFS_TEST)
 	@echo REFS_FLAG_TEST: $(REFS_FLAG_TEST)

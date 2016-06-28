@@ -8,11 +8,11 @@ namespace iTextSharp.text.pdf {
     public class GlyphList {
         private static Hashtable unicode2names = new Hashtable();
         private static Hashtable names2unicode = new Hashtable();
-    
+
         static GlyphList() {
             Stream istr = null;
             try {
-                istr = BaseFont.GetResourceStream(BaseFont.RESOURCE_PATH + "glyphlist.txt");
+                istr = BaseFont.GetResourceStream("glyphlist.txt");
                 if (istr == null) {
                    string msg = string.Format("glyphlist.txt not found as resource. (path: {0})", BaseFont.RESOURCE_PATH);
                    throw new Exception(msg);
@@ -61,11 +61,11 @@ namespace iTextSharp.text.pdf {
                 }
             }
         }
-    
+
         public static int[] NameToUnicode(string name) {
             return (int[])names2unicode[name];
         }
-    
+
         public static string UnicodeToName(int num) {
             return (string)unicode2names[num];
         }
