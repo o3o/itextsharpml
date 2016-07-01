@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Collections;
 using System.util;
@@ -15,7 +14,7 @@ namespace iTextSharp.text {
    /// without having to enter a path as parameter.
    /// </summary>
    public class FontFactoryImp {
-        
+
       /// <summary> This is a map of postscriptfontnames of True Type fonts and the path of their ttf- or ttc-file. </summary>
       private Properties trueTypeFonts = new Properties();
 
@@ -25,16 +24,16 @@ namespace iTextSharp.text {
          "1", "0", "0",
          "0", "3", "0"
       };
-        
+
       /// <summary> This is a map of fontfamilies. </summary>
       private Hashtable fontFamilies = new Hashtable();
-    
+
       /// <summary> This is the default encoding to use. </summary>
       private string defaultEncoding = BaseFont.WINANSI;
-    
+
       /// <summary> This is the default value of the <VAR>embedded</VAR> variable. </summary>
       private bool defaultEmbedding = BaseFont.NOT_EMBEDDED;
-    
+
       /// <summary> Creates new FontFactory </summary>
       public FontFactoryImp() {
          trueTypeFonts.Add(FontFactory.COURIER.ToLower(CultureInfo.InvariantCulture), FontFactory.COURIER);
@@ -79,7 +78,7 @@ namespace iTextSharp.text {
          tmp.Add(FontFactory.ZAPFDINGBATS);
          fontFamilies[FontFactory.ZAPFDINGBATS.ToLower(CultureInfo.InvariantCulture)] = tmp;
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -94,17 +93,18 @@ namespace iTextSharp.text {
          return GetFont(fontname, encoding, embedded, size, style, color, true);
       }
 
-      /// <summary>
-      /// Constructs a Font-object.
-      /// </summary>
-      /// <param name="fontname">the name of the font</param>
-      /// <param name="encoding">the encoding of the font</param>
-      /// <param name="embedded">true if the font is to be embedded in the PDF</param>
-      /// <param name="size">the size of this font</param>
-      /// <param name="style">the style of this font</param>
-      /// <param name="color">the Color of this font</param>
-      /// <param name="cached">true if the font comes from the cache or is added to the cache if new, false if the font is always created new</param>
-      /// <returns>a Font object</returns>
+      /**
+      * Constructs a Font-object.
+      *
+      * @param fontname the name of the fontparam
+      * @param encoding the encoding of the font
+      * @param embedded true if the font is to be embedded in the PDF
+      * @param size the size of this font
+      * @param style the style of this font
+      * @param color the Color of this font
+      * @param cached true if the font comes from the cache or is added to the cache if new, false if the font is always created new
+      * @returns a Font object
+      */
       public virtual Font GetFont(string fontname, string encoding, bool embedded, float size, int style, Color color, bool cached) {
          if (fontname == null) return new Font(Font.UNDEFINED, size, style, color);
          string lowercasefontname = fontname.ToLower(CultureInfo.InvariantCulture);
@@ -160,7 +160,7 @@ namespace iTextSharp.text {
          }
          return new Font(basefont, size, style, color);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -246,7 +246,7 @@ namespace iTextSharp.text {
          }
          return GetFont(fontname, encoding, embedded, size, style, color);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -259,7 +259,7 @@ namespace iTextSharp.text {
       public Font GetFont(string fontname, string encoding, bool embedded, float size, int style) {
          return GetFont(fontname, encoding, embedded, size, style, null);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -271,7 +271,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, string encoding, bool embedded, float size) {
          return GetFont(fontname, encoding, embedded, size, Font.UNDEFINED, null);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -282,7 +282,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, string encoding, bool embedded) {
          return GetFont(fontname, encoding, embedded, Font.UNDEFINED, Font.UNDEFINED, null);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -295,7 +295,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, string encoding, float size, int style, Color color) {
          return GetFont(fontname, encoding, defaultEmbedding, size, style, color);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -307,7 +307,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, string encoding, float size, int style) {
          return GetFont(fontname, encoding, defaultEmbedding, size, style, null);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -318,7 +318,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, string encoding, float size) {
          return GetFont(fontname, encoding, defaultEmbedding, size, Font.UNDEFINED, null);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -328,7 +328,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, string encoding) {
          return GetFont(fontname, encoding, defaultEmbedding, Font.UNDEFINED, Font.UNDEFINED, null);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -340,7 +340,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, float size, int style, Color color) {
          return GetFont(fontname, defaultEncoding, defaultEmbedding, size, style, color);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -351,7 +351,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, float size, Color color) {
          return GetFont(fontname, defaultEncoding, defaultEmbedding, size, Font.UNDEFINED, color);
       }
-        
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -362,7 +362,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, float size, int style) {
          return GetFont(fontname, defaultEncoding, defaultEmbedding, size, style, null);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -372,7 +372,7 @@ namespace iTextSharp.text {
       public virtual Font GetFont(string fontname, float size) {
          return GetFont(fontname, defaultEncoding, defaultEmbedding, size, Font.UNDEFINED, null);
       }
-    
+
       /// <summary>
       /// Constructs a Font-object.
       /// </summary>
@@ -391,7 +391,7 @@ namespace iTextSharp.text {
 
          Register(path, alias);
       }
-    
+
       /**
          Register a font by giving explicitly the font family and name.
          @param familyName the font family
@@ -430,19 +430,19 @@ namespace iTextSharp.text {
       public virtual void Register(string path) {
          Register(path, null);
       }
-    
-      /**
-       Register a ttf- or a ttc-file and use an alias for the font contained in the ttf-file.
 
-       @parm path the path to a ttf- or ttc-file
-       @parm alias the alias you want to use for the font
+      /**
+       * Register a ttf- or a ttc-file and use an alias for the font contained in the ttf-file.
+       *
+       * @parm path the path to a ttf- or ttc-file
+       * @parm alias the alias you want to use for the font
       */
       public virtual void Register(string path, string alias) {
          try {
             if (path.ToLower(CultureInfo.InvariantCulture).EndsWith(".ttf") || path.ToLower(CultureInfo.InvariantCulture).EndsWith(".otf") || path.ToLower(CultureInfo.InvariantCulture).IndexOf(".ttc,") > 0) {
                Object[] allNames = BaseFont.GetAllFontNames(path, BaseFont.WINANSI, null);
                trueTypeFonts.Add(((string)allNames[0]).ToLower(CultureInfo.InvariantCulture), path);
-               if (alias != null) {
+               if (!string.IsNullOrEmpty(alias)) {
                   trueTypeFonts.Add(alias.ToLower(CultureInfo.InvariantCulture), path);
                }
                // register all the font names with all the locales
@@ -478,14 +478,12 @@ namespace iTextSharp.text {
                      }
                   }
                }
-            }
-            else if (path.ToLower(CultureInfo.InvariantCulture).EndsWith(".ttc")) {
+            } else if (path.ToLower(CultureInfo.InvariantCulture).EndsWith(".ttc")) {
                string[] names = BaseFont.EnumerateTTCNames(path);
                for (int i = 0; i < names.Length; i++) {
                   Register(path + "," + i);
                }
-            }
-            else if (path.ToLower(CultureInfo.InvariantCulture).EndsWith(".afm") || path.ToLower(CultureInfo.InvariantCulture).EndsWith(".pfm")) {
+            } else if (path.ToLower(CultureInfo.InvariantCulture).EndsWith(".afm") || path.ToLower(CultureInfo.InvariantCulture).EndsWith(".pfm")) {
                BaseFont bf = BaseFont.CreateFont(path, BaseFont.CP1252, false);
                String fullName = (bf.FullFontName[0][3]).ToLower(CultureInfo.InvariantCulture);
                String familyName = (bf.FamilyFontName[0][3]).ToLower(CultureInfo.InvariantCulture);
@@ -494,20 +492,19 @@ namespace iTextSharp.text {
                trueTypeFonts.Add(psName, path);
                trueTypeFonts.Add(fullName, path);
             }
-         }
-         catch (DocumentException de) {
+         } catch (DocumentException de) {
             // this shouldn't happen
             throw de;
-         }
-         catch (System.IO.IOException ioe) {
+         } catch (System.IO.IOException ioe) {
             throw ioe;
          }
       }
-    
-      /** Register all the fonts in a directory.
+
+      /**
+       * Register all the fonts in a directory.
        * @param dir the directory
        * @return the number of fonts registered
-       */    
+       */
       public virtual int RegisterDirectory(string dir) {
          return RegisterDirectory(dir, false);
       }
@@ -523,10 +520,10 @@ namespace iTextSharp.text {
          int count = 0;
          try {
             if (!Directory.Exists(baseDir)) return 0;
-            
+
             string[] files = Directory.GetFiles(baseDir);
             if (files != null) {
-               foreach (string file in files) { 
+               foreach (string file in files) {
                   string name = Path.GetFullPath(file);
                   string suffix = GetSuffix(name);
                   if (".afm".Equals(suffix) || ".pfm".Equals(suffix)) {
@@ -544,12 +541,11 @@ namespace iTextSharp.text {
             }
             if (scanSubdirectories) {
                var dirs = System.IO.Directory.GetDirectories(baseDir);
-               foreach (string dir in dirs) { 
+               foreach (string dir in dirs) {
                   count += RegisterDirectory(dir, true);
                }
             }
-         }
-         catch  {
+         } catch  {
             //empty on purpose
          }
          return count;
@@ -559,7 +555,7 @@ namespace iTextSharp.text {
          return name.Length < 4 ? null : name.Substring(name.Length - 4).ToLower(CultureInfo.InvariantCulture);
       }
 
-      /** 
+      /**
           Register fonts in some probable directories. It usually works in Windows,
           Linux and Solaris.
           @return the number of fonts registered
@@ -580,16 +576,15 @@ namespace iTextSharp.text {
          return count;
       }
 
-      /// <summary>
-      /// Gets a set of registered fontnames.
-      /// </summary>
-      /// <value>a set of registered fontnames</value>
+      /**
+       * Gets a set of registered fontnames.
+      */
       public virtual ICollection RegisteredFonts {
          get {
             return trueTypeFonts.Keys;
          }
       }
-    
+
       /// <summary>
       /// Gets a set of registered font families.
       /// </summary>
@@ -599,7 +594,7 @@ namespace iTextSharp.text {
             return fontFamilies.Keys;
          }
       }
-    
+
       /// <summary>
       /// Checks if a certain font is registered.
       /// </summary>
