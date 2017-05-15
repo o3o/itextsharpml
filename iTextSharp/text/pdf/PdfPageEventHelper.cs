@@ -4,7 +4,7 @@ using iTextSharp.text;
 
 /*
  * $Id: PdfPageEventHelper.cs,v 1.3 2008/05/13 11:25:21 psoares33 Exp $
- * 
+ *
  *
  * Copyright 2001, 2002 Paulo Soares
  *
@@ -51,7 +51,6 @@ using iTextSharp.text;
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 namespace iTextSharp.text.pdf {
 
     /**
@@ -63,7 +62,7 @@ namespace iTextSharp.text.pdf {
      */
 
     public class PdfPageEventHelper : IPdfPageEvent {
-    
+
         /**
                                          * Called when the document is opened.
                                          *
@@ -72,7 +71,7 @@ namespace iTextSharp.text.pdf {
                                          */
         public virtual void OnOpenDocument(PdfWriter writer,Document document) {
         }
-    
+
         /**
          * Called when a page is initialized.
          * <P>
@@ -85,7 +84,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnStartPage(PdfWriter writer,Document document) {
         }
-    
+
         /**
          * Called when a page is finished, just before being written to the document.
          *
@@ -94,7 +93,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnEndPage(PdfWriter writer,Document document) {
         }
-    
+
         /**
          * Called when the document is closed.
          * <P>
@@ -106,7 +105,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnCloseDocument(PdfWriter writer,Document document) {
         }
-    
+
         /**
          * Called when a Paragraph is written.
          * <P>
@@ -120,7 +119,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnParagraph(PdfWriter writer,Document document,float paragraphPosition) {
         }
-    
+
         /**
          * Called when a Paragraph is written.
          * <P>
@@ -132,7 +131,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnParagraphEnd(PdfWriter writer,Document document,float paragraphPosition) {
         }
-    
+
         /**
          * Called when a Chapter is written.
          * <P>
@@ -146,7 +145,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnChapter(PdfWriter writer,Document document,float paragraphPosition,Paragraph title) {
         }
-    
+
         /**
          * Called when the end of a Chapter is reached.
          * <P>
@@ -158,7 +157,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnChapterEnd(PdfWriter writer,Document document,float position) {
         }
-    
+
         /**
          * Called when a Section is written.
          * <P>
@@ -172,7 +171,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnSection(PdfWriter writer,Document document,float paragraphPosition,int depth,Paragraph title) {
         }
-    
+
         /**
          * Called when the end of a Section is reached.
          * <P>
@@ -184,7 +183,7 @@ namespace iTextSharp.text.pdf {
          */
         public virtual void OnSectionEnd(PdfWriter writer,Document document,float position) {
         }
-    
+
         /**
          * Called when a <CODE>Chunk</CODE> with a generic tag is written.
          * <P>
