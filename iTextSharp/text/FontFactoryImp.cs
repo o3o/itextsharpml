@@ -18,7 +18,7 @@ namespace iTextSharp.text {
       /// <summary> This is a map of postscriptfontnames of True Type fonts and the path of their ttf- or ttc-file. </summary>
       private Properties trueTypeFonts = new Properties();
 
-      private static String[] TTFamilyOrder = {
+      private static string[] TTFamilyOrder = {
          "3", "1", "1033",
          "3", "0", "1033",
          "1", "0", "0",
@@ -398,7 +398,7 @@ namespace iTextSharp.text {
          @param fullName the font name
          @param path the font path
       */
-      public void RegisterFamily(String familyName, String fullName, String path) {
+      public void RegisterFamily(string familyName, string fullName, string path) {
          if (path != null) {
             trueTypeFonts.Add(fullName, path);
          }
@@ -412,7 +412,7 @@ namespace iTextSharp.text {
             int fullNameLength = fullName.Length;
             bool inserted = false;
             for (int j = 0; j < tmp.Count; ++j) {
-               if (((String)tmp[j]).Length >= fullNameLength) {
+               if (((string)tmp[j]).Length >= fullNameLength) {
                   tmp.Insert(j, fullName);
                   inserted = true;
                   break;
@@ -440,7 +440,7 @@ namespace iTextSharp.text {
       public virtual void Register(string path, string alias) {
          try {
             if (path.ToLower(CultureInfo.InvariantCulture).EndsWith(".ttf") || path.ToLower(CultureInfo.InvariantCulture).EndsWith(".otf") || path.ToLower(CultureInfo.InvariantCulture).IndexOf(".ttc,") > 0) {
-               Object[] allNames = BaseFont.GetAllFontNames(path, BaseFont.WINANSI, null);
+               object[] allNames = BaseFont.GetAllFontNames(path, BaseFont.WINANSI, null);
                trueTypeFonts.Add(((string)allNames[0]).ToLower(CultureInfo.InvariantCulture), path);
                if (!string.IsNullOrEmpty(alias)) {
                   trueTypeFonts.Add(alias.ToLower(CultureInfo.InvariantCulture), path);
@@ -463,7 +463,7 @@ namespace iTextSharp.text {
                   }
                }
                if (familyName != null) {
-                  String lastName = "";
+                  string lastName = "";
                   names = (string[][])allNames[2]; //full name
                   for (int i = 0; i < names.Length; i++) {
                      for (int k = 0; k < TTFamilyOrder.Length; k += 3) {
@@ -485,9 +485,9 @@ namespace iTextSharp.text {
                }
             } else if (path.ToLower(CultureInfo.InvariantCulture).EndsWith(".afm") || path.ToLower(CultureInfo.InvariantCulture).EndsWith(".pfm")) {
                BaseFont bf = BaseFont.CreateFont(path, BaseFont.CP1252, false);
-               String fullName = (bf.FullFontName[0][3]).ToLower(CultureInfo.InvariantCulture);
-               String familyName = (bf.FamilyFontName[0][3]).ToLower(CultureInfo.InvariantCulture);
-               String psName = bf.PostscriptFontName.ToLower(CultureInfo.InvariantCulture);
+               string fullName = (bf.FullFontName[0][3]).ToLower(CultureInfo.InvariantCulture);
+               string familyName = (bf.FamilyFontName[0][3]).ToLower(CultureInfo.InvariantCulture);
+               string psName = bf.PostscriptFontName.ToLower(CultureInfo.InvariantCulture);
                RegisterFamily(familyName, fullName, null);
                trueTypeFonts.Add(psName, path);
                trueTypeFonts.Add(fullName, path);

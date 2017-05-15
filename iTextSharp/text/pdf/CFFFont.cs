@@ -40,7 +40,7 @@ using System.Collections;
 
 namespace iTextSharp.text.pdf {
     public class CFFFont {
-        
+
         internal static String[] operatorNames = {
             "version", "Notice", "FullName", "FamilyName",
             "Weight", "FontBBox", "BlueValues", "OtherBlues",
@@ -61,7 +61,7 @@ namespace iTextSharp.text.pdf {
             "CIDFontRevision", "CIDFontType", "CIDCount", "UIDBase",
             "FDArray", "FDSelect", "FontName"
         };
-        
+
         internal static String[] standardStrings = {
             // Automatically generated from Appendix A of the CFF specification; do
             // not edit. Size should be 391.
@@ -133,7 +133,7 @@ namespace iTextSharp.text.pdf {
             "Ydieresissmall", "001.000", "001.001", "001.002", "001.003", "Black",
             "Bold", "Book", "Light", "Medium", "Regular", "Roman", "Semibold"
         };
-        
+
         //private String[] strings;
         public String GetString(char sid) {
             if (sid < standardStrings.Length) return standardStrings[sid];
@@ -148,16 +148,16 @@ namespace iTextSharp.text.pdf {
             Seek(p);
             return s.ToString();
         }
-        
+
         internal char GetCard8() {
             byte i = buf.ReadByte();
             return (char)(i & 0xff);
         }
-        
+
         internal char GetCard16() {
             return buf.ReadChar();
         }
-        
+
         internal int GetOffset(int offSize) {
             int offset = 0;
             for (int i=0; i<offSize; i++) {
@@ -166,19 +166,19 @@ namespace iTextSharp.text.pdf {
             }
             return offset;
         }
-        
+
         internal void Seek(int offset) {
             buf.Seek(offset);
         }
-        
+
         internal short GetShort() {
             return buf.ReadShort();
         }
-        
+
         internal int GetInt() {
             return buf.ReadInt();
         }
-        
+
         internal int GetPosition() {
             return buf.FilePointer;
         }
@@ -190,45 +190,45 @@ namespace iTextSharp.text.pdf {
         // Sets the nextIndexOffset.
         internal int[] GetIndex(int nextIndexOffset) {
             int count, indexOffSize;
-            
+
             Seek(nextIndexOffset);
             count = GetCard16();
             int[] offsets = new int[count+1];
-            
+
             if (count==0) {
                 offsets[0] = -1;
                 nextIndexOffset += 2;
                 return offsets;
             }
-            
+
             indexOffSize = GetCard8();
-            
+
             for (int j=0; j<=count; j++) {
                 //nextIndexOffset = ofset to relative segment
                 offsets[j] = nextIndexOffset
                 //2-> count in the index header. 1->offset size in index header
                 + 2+1
-                //offset array size * offset size 
+                //offset array size * offset size
                 + (count+1)*indexOffSize
                 //???zero <-> one base
                 - 1
-                // read object offset relative to object array base 
+                // read object offset relative to object array base
                 + GetOffset(indexOffSize);
             }
             //nextIndexOffset = offsets[count];
             return offsets;
         }
-        
+
         protected String   key;
         protected Object[] args      = new Object[48];
         protected int      arg_count = 0;
-        
+
         protected void GetDictItem() {
             for (int i=0; i<arg_count; i++) args[i]=null;
             arg_count = 0;
             key = null;
             bool gotKey = false;
-            
+
             while (!gotKey) {
                 char b0 = GetCard8();
                 if (b0 == 29) {
@@ -311,10 +311,10 @@ namespace iTextSharp.text.pdf {
                 }
             }
         }
-        
+
         /** List items for the linked list that builds the new CID font.
         */
-        
+
         protected internal abstract class Item {
             protected internal int myOffset = -1;
             /** remember the current offset and increment by item's size in bytes. */
@@ -326,7 +326,7 @@ namespace iTextSharp.text.pdf {
             /** Fix up cross references to this item (applies only to markers). */
             public virtual void Xref() {}
         }
-        
+
         protected internal abstract class OffsetItem : Item {
             public int value;
             /** set the value of an offset item that was initially unknown.
@@ -334,11 +334,11 @@ namespace iTextSharp.text.pdf {
             */
             public void Set(int offset) { this.value = offset; }
         }
-        
-        
+
+
         /** A range item.
         */
-        
+
         protected internal class RangeItem : Item {
             public int offset, length;
             private RandomAccessFileOrArray buf;
@@ -359,7 +359,7 @@ namespace iTextSharp.text.pdf {
                 //System.err.Println("finished range emit");
             }
         }
-        
+
         /** An index-offset item for the list.
         * The size denotes the required size in the CFF. A positive
         * value means that we need a specific size in bytes (for offset arrays)
@@ -370,7 +370,7 @@ namespace iTextSharp.text.pdf {
             public int size;
             public IndexOffsetItem(int size, int value) {this.size=size; this.value=value;}
             public IndexOffsetItem(int size) {this.size=size; }
-            
+
             public override void Increment(int[] currentOffset) {
                 base.Increment(currentOffset);
                 currentOffset[0] += size;
@@ -404,11 +404,11 @@ namespace iTextSharp.text.pdf {
                 */
             }
         }
-        
+
         protected internal class IndexBaseItem : Item {
             public IndexBaseItem() {}
         }
-        
+
         protected internal class IndexMarkerItem : Item {
             private OffsetItem offItem;
             private IndexBaseItem indexBase;
@@ -422,7 +422,7 @@ namespace iTextSharp.text.pdf {
             }
         }
         /**
-        * 
+        *
         * @author orly manor
         *
         * TODO To change the template for this generated type comment go to
@@ -440,15 +440,15 @@ namespace iTextSharp.text.pdf {
                 offItem.Set(this.myOffset-indexBase.myOffset);
             }
         }
-        
-        
+
+
         /** an unknown offset in a dictionary for the list.
         * We will fix up the offset later; for now, assume it's large.
         */
         protected internal class DictOffsetItem : OffsetItem {
             public int size;
             public DictOffsetItem() {this.size=5; }
-            
+
             public override void Increment(int[] currentOffset) {
                 base.Increment(currentOffset);
                 currentOffset[0] += size;
@@ -464,14 +464,14 @@ namespace iTextSharp.text.pdf {
                 }
             }
         }
-        
+
         /** Card24 item.
         */
-        
+
         protected internal class UInt24Item : Item {
             public int value;
             public UInt24Item(int value) {this.value=value;}
-            
+
             public override void Increment(int[] currentOffset) {
                 base.Increment(currentOffset);
                 currentOffset[0] += 3;
@@ -483,14 +483,14 @@ namespace iTextSharp.text.pdf {
                 buffer[myOffset+2] = (byte) ((value >> 0) & 0xff);
             }
         }
-        
+
         /** Card32 item.
         */
-        
+
         protected internal class UInt32Item : Item {
             public int value;
             public UInt32Item(int value) {this.value=value;}
-            
+
             public override void Increment(int[] currentOffset) {
                 base.Increment(currentOffset);
                 currentOffset[0] += 4;
@@ -506,11 +506,11 @@ namespace iTextSharp.text.pdf {
 
         /** A SID or Card16 item.
         */
-        
+
         protected internal class UInt16Item : Item {
             public char value;
             public UInt16Item(char value) {this.value=value;}
-            
+
             public override void Increment(int[] currentOffset) {
                 base.Increment(currentOffset);
                 currentOffset[0] += 2;
@@ -521,14 +521,14 @@ namespace iTextSharp.text.pdf {
                 buffer[myOffset+1] = (byte) ((value >> 0) & 0xff);
             }
         }
-        
+
         /** A Card8 item.
         */
-        
+
         protected internal class UInt8Item : Item {
             public char value;
             public UInt8Item(char value) {this.value=value;}
-            
+
             public override void Increment(int[] currentOffset) {
                 base.Increment(currentOffset);
                 currentOffset[0] += 1;
@@ -538,11 +538,11 @@ namespace iTextSharp.text.pdf {
                 buffer[myOffset+0] = (byte) ((value >> 0) & 0xff);
             }
         }
-        
+
         protected internal class StringItem : Item {
             public String s;
             public StringItem(String s) {this.s=s;}
-            
+
             public override void Increment(int[] currentOffset) {
                 base.Increment(currentOffset);
                 currentOffset[0] += s.Length;
@@ -552,13 +552,13 @@ namespace iTextSharp.text.pdf {
                     buffer[myOffset+i] = (byte) (s[i] & 0xff);
             }
         }
-        
-        
+
+
         /** A dictionary number on the list.
         * This implementation is inefficient: it doesn't use the variable-length
         * representation.
         */
-        
+
         protected internal class DictNumberItem : Item {
             public int value;
             public int size = 5;
@@ -578,11 +578,11 @@ namespace iTextSharp.text.pdf {
                 }
             }
         }
-        
+
         /** An offset-marker item for the list.
         * It is used to mark an offset and to set the offset list item.
         */
-        
+
         protected internal class MarkerItem : Item {
             OffsetItem p;
             public MarkerItem(OffsetItem pointerToMarker) {p=pointerToMarker;}
@@ -590,13 +590,13 @@ namespace iTextSharp.text.pdf {
                 p.Set(this.myOffset);
             }
         }
-        
+
         /** a utility that creates a range item for an entire index
         *
         * @param indexOffset where the index is
         * @return a range item representing the entire index
         */
-        
+
         protected virtual RangeItem GetEntireIndexRange(int indexOffset) {
             Seek(indexOffset);
             int count = GetCard16();
@@ -610,8 +610,8 @@ namespace iTextSharp.text.pdf {
                 2+1+(count+1)*indexOffSize+size);
             }
         }
-        
-        
+
+
         /** get a single CID font. The PDF architecture (1.4)
         * supports 16-bit strings only with CID CFF fonts, not
         * in Type-1 CFF fonts, so we convert the font to CID if
@@ -621,30 +621,28 @@ namespace iTextSharp.text.pdf {
         * a PDF restriction) and to subset the CharStrings glyph
         * description.
         */
-        
-        
-        public byte[] GetCID(String fontName)
-        //throws java.io.FileNotFoundException
-        {
+
+
+        public byte[] GetCID(String fontName) {
             int j;
             for (j=0; j<fonts.Length; j++)
                 if (fontName.Equals(fonts[j].name)) break;
             if (j==fonts.Length) return null;
-            
+
             ArrayList l = new ArrayList();
-            
+
             // copy the header
-            
+
             Seek(0);
-            
+
             int major = GetCard8();
             int minor = GetCard8();
             int hdrSize = GetCard8();
             int offSize = GetCard8();
             nextIndexOffset = hdrSize;
-            
+
             l.Add(new RangeItem(buf,0,hdrSize));
-            
+
             int nglyphs=-1, nstrings=-1;
             if ( ! fonts[j].isCID ) {
                 // count the glyphs
@@ -654,18 +652,18 @@ namespace iTextSharp.text.pdf {
                 nstrings = GetCard16()+standardStrings.Length;
                 //System.err.Println("number of glyphs = "+nglyphs);
             }
-            
+
             // create a name index
-            
+
             l.Add(new UInt16Item((char)1)); // count
             l.Add(new UInt8Item((char)1)); // offSize
             l.Add(new UInt8Item((char)1)); // first offset
             l.Add(new UInt8Item((char)( 1+fonts[j].name.Length )));
             l.Add(new StringItem(fonts[j].name));
-            
+
             // create the topdict Index
-            
-            
+
+
             l.Add(new UInt16Item((char)1)); // count
             l.Add(new UInt8Item((char)2)); // offSize
             l.Add(new UInt16Item((char)1)); // first offset
@@ -673,22 +671,22 @@ namespace iTextSharp.text.pdf {
             l.Add(topdictIndex1Ref);
             IndexBaseItem topdictBase = new IndexBaseItem();
             l.Add(topdictBase);
-            
+
             /*
             int maxTopdictLen = (topdictOffsets[j+1]-topdictOffsets[j])
                                 + 9*2 // at most 9 new keys
                                 + 8*5 // 8 new integer arguments
                                 + 3*2;// 3 new SID arguments
             */
-            
+
             //int    topdictNext = 0;
             //byte[] topdict = new byte[maxTopdictLen];
-            
+
             OffsetItem charsetRef     = new DictOffsetItem();
             OffsetItem charstringsRef = new DictOffsetItem();
             OffsetItem fdarrayRef     = new DictOffsetItem();
             OffsetItem fdselectRef    = new DictOffsetItem();
-            
+
             if ( !fonts[j].isCID ) {
                 // create a ROS key
                 l.Add(new DictNumberItem(nstrings));
@@ -703,7 +701,7 @@ namespace iTextSharp.text.pdf {
                 // What about UIDBase (12,35)? Don't know what is it.
                 // I don't think we need FontName; the font I looked at didn't have it.
             }
-            
+
             // create an FDArray key
             l.Add(fdarrayRef);
             l.Add(new UInt8Item((char)12));
@@ -718,7 +716,7 @@ namespace iTextSharp.text.pdf {
             // create a CharStrings key
             l.Add(charstringsRef);
             l.Add(new UInt8Item((char)17));
-            
+
             Seek(topdictOffsets[j]);
             while (GetPosition() < topdictOffsets[j+1]) {
                 int p1 = GetPosition();
@@ -736,13 +734,13 @@ namespace iTextSharp.text.pdf {
                     l.Add(new RangeItem(buf,p1,p2-p1));
                 }
             }
-            
+
             l.Add(new IndexMarkerItem(topdictIndex1Ref,topdictBase));
-            
+
             // Copy the string index and append new strings.
             // We need 3 more strings: Registry, Ordering, and a FontName for one FD.
             // The total length is at most "Adobe"+"Identity"+63 = 76
-            
+
             if (fonts[j].isCID) {
                 l.Add(GetEntireIndexRange(stringIndexOffset));
             } else {
@@ -750,17 +748,17 @@ namespace iTextSharp.text.pdf {
                 if (fdFontName.Length > 127)
                     fdFontName = fdFontName.Substring(0,127);
                 String extraStrings = "Adobe"+"Identity"+fdFontName;
-                
+
                 int origStringsLen = stringOffsets[stringOffsets.Length-1]
                 - stringOffsets[0];
                 int stringsBaseOffset = stringOffsets[0]-1;
-                
+
                 byte stringsIndexOffSize;
                 if (origStringsLen+extraStrings.Length <= 0xff) stringsIndexOffSize = 1;
                 else if (origStringsLen+extraStrings.Length <= 0xffff) stringsIndexOffSize = 2;
                 else if (origStringsLen+extraStrings.Length <= 0xffffff) stringsIndexOffSize = 3;
                 else stringsIndexOffSize = 4;
-                
+
                 l.Add(new UInt16Item((char)((stringOffsets.Length-1)+3))); // count
                 l.Add(new UInt8Item((char)stringsIndexOffSize)); // offSize
                 for (int i=0; i<stringOffsets.Length; i++)
@@ -775,17 +773,17 @@ namespace iTextSharp.text.pdf {
                 l.Add(new IndexOffsetItem(stringsIndexOffSize,currentStringsOffset));
                 currentStringsOffset += fdFontName.Length;
                 l.Add(new IndexOffsetItem(stringsIndexOffSize,currentStringsOffset));
-                
+
                 l.Add(new RangeItem(buf,stringOffsets[0],origStringsLen));
                 l.Add(new StringItem(extraStrings));
             }
-            
+
             // copy the global subroutine index
-            
+
             l.Add(GetEntireIndexRange(gsubrIndexOffset));
-            
+
             // deal with fdarray, fdselect, and the font descriptors
-            
+
             if (fonts[j].isCID) {
                 // copy the FDArray, FDSelect, charset
             } else {
@@ -793,50 +791,50 @@ namespace iTextSharp.text.pdf {
                 l.Add(new MarkerItem(fdselectRef));
                 l.Add(new UInt8Item((char)3)); // format identifier
                 l.Add(new UInt16Item((char)1)); // nRanges
-                
+
                 l.Add(new UInt16Item((char)0)); // Range[0].firstGlyph
                 l.Add(new UInt8Item((char)0)); // Range[0].fd
-                
+
                 l.Add(new UInt16Item((char)nglyphs)); // sentinel
-                
+
                 // recreate a new charset
                 // This format is suitable only for fonts without subsetting
-                
+
                 l.Add(new MarkerItem(charsetRef));
                 l.Add(new UInt8Item((char)2)); // format identifier
-                
+
                 l.Add(new UInt16Item((char)1)); // first glyph in range (ignore .notdef)
                 l.Add(new UInt16Item((char)(nglyphs-1))); // nLeft
                 // now all are covered, the data structure is complete.
-                
+
                 // create a font dict index (fdarray)
-                
+
                 l.Add(new MarkerItem(fdarrayRef));
                 l.Add(new UInt16Item((char)1));
                 l.Add(new UInt8Item((char)1)); // offSize
                 l.Add(new UInt8Item((char)1)); // first offset
-                
+
                 OffsetItem privateIndex1Ref = new IndexOffsetItem(1);
                 l.Add(privateIndex1Ref);
                 IndexBaseItem privateBase = new IndexBaseItem();
                 l.Add(privateBase);
-                
+
                 // looking at the PS that acrobat generates from a PDF with
                 // a CFF opentype font embeded with an identity-H encoding,
                 // it seems that it does not need a FontName.
                 //l.Add(new DictNumberItem((standardStrings.length+(stringOffsets.length-1)+2)));
                 //l.Add(new UInt8Item((char)12));
                 //l.Add(new UInt8Item((char)38)); // FontName
-                
+
                 l.Add(new DictNumberItem(fonts[j].privateLength));
                 OffsetItem privateRef = new DictOffsetItem();
                 l.Add(privateRef);
                 l.Add(new UInt8Item((char)18)); // Private
-                
+
                 l.Add(new IndexMarkerItem(privateIndex1Ref,privateBase));
-                
+
                 // copy the private index & local subroutines
-                
+
                 l.Add(new MarkerItem(privateRef));
                 // copy the private dict and the local subroutines.
                 // the length of the private dict seems to NOT include
@@ -847,51 +845,51 @@ namespace iTextSharp.text.pdf {
                     l.Add(GetEntireIndexRange(fonts[j].privateSubrs));
                 }
             }
-            
+
             // copy the charstring index
-            
+
             l.Add(new MarkerItem(charstringsRef));
             l.Add(GetEntireIndexRange(fonts[j].charstringsOffset));
-            
+
             // now create the new CFF font
-            
+
             int[] currentOffset = new int[1];
             currentOffset[0] = 0;
-            
+
             foreach (Item item in l) {
                 item.Increment(currentOffset);
             }
-            
+
             foreach (Item item in l) {
                 item.Xref();
             }
-            
+
             int size = currentOffset[0];
             byte[] b = new byte[size];
-            
+
             foreach (Item item in l) {
                 item.Emit(b);
             }
-            
+
             return b;
         }
-        
-        
+
+
         public bool IsCID(String fontName) {
             int j;
             for (j=0; j<fonts.Length; j++)
                 if (fontName.Equals(fonts[j].name)) return fonts[j].isCID;
             return false;
         }
-        
+
         public bool Exists(String fontName) {
             int j;
             for (j=0; j<fonts.Length; j++)
                 if (fontName.Equals(fonts[j].name)) return true;
             return false;
         }
-        
-        
+
+
         public String[] GetNames() {
             String[] names = new String[ fonts.Length ];
             for (int i=0; i<fonts.Length; i++)
@@ -904,7 +902,7 @@ namespace iTextSharp.text.pdf {
         */
         protected RandomAccessFileOrArray buf;
         private int offSize;
-        
+
         protected int nameIndexOffset;
         protected int topdictIndexOffset;
         protected int stringIndexOffset;
@@ -913,7 +911,7 @@ namespace iTextSharp.text.pdf {
         protected int[] topdictOffsets;
         protected int[] stringOffsets;
         protected int[] gsubrOffsets;
-        
+
         /**
         * @author orly manor
         * TODO Changed from private to protected by Ygal&Oren
@@ -933,7 +931,7 @@ namespace iTextSharp.text.pdf {
             public int[]     fdprivateOffsets;
             public int[]     fdprivateLengths;
             public int[]     fdprivateSubrs;
-            
+
             // Added by Oren & Ygal
             public int nglyphs;
             public int nstrings;
@@ -953,27 +951,27 @@ namespace iTextSharp.text.pdf {
         }
         // Changed from private to protected by Ygal&Oren
         protected Font[] fonts;
-        
+
         public CFFFont(RandomAccessFileOrArray inputbuffer) {
-            
+
             //System.err.Println("CFF: nStdString = "+standardStrings.length);
             buf = inputbuffer;
             Seek(0);
-            
+
             int major, minor;
             major = GetCard8();
             minor = GetCard8();
-            
+
             //System.err.Println("CFF Major-Minor = "+major+"-"+minor);
-            
+
             int hdrSize = GetCard8();
-            
+
             offSize = GetCard8();
-            
+
             //System.err.Println("offSize = "+offSize);
-            
+
             //int count, indexOffSize, indexOffset, nextOffset;
-            
+
             nameIndexOffset    = hdrSize;
             nameOffsets        = GetIndex(nameIndexOffset);
             topdictIndexOffset = nameOffsets[nameOffsets.Length-1];
@@ -982,11 +980,11 @@ namespace iTextSharp.text.pdf {
             stringOffsets      = GetIndex(stringIndexOffset);
             gsubrIndexOffset   = stringOffsets[stringOffsets.Length-1];
             gsubrOffsets       = GetIndex(gsubrIndexOffset);
-            
+
             fonts = new Font[nameOffsets.Length-1];
-            
+
             // now get the name index
-            
+
             /*
             names             = new String[nfonts];
             privateOffset     = new int[nfonts];
@@ -996,7 +994,7 @@ namespace iTextSharp.text.pdf {
             fdarrayOffset     = new int[nfonts];
             fdselectOffset    = new int[nfonts];
             */
-            
+
             for (int j=0; j<nameOffsets.Length-1; j++) {
                 fonts[j] = new Font();
                 Seek(nameOffsets[j]);
@@ -1006,9 +1004,9 @@ namespace iTextSharp.text.pdf {
                 }
                 //System.err.Println("name["+j+"]=<"+fonts[j].name+">");
             }
-            
+
             // string index
-            
+
             //strings = new String[stringOffsets.length-1];
             /*
             System.err.Println("std strings = "+standardStrings.length);
@@ -1023,12 +1021,12 @@ namespace iTextSharp.text.pdf {
                 System.err.Println("strings["+(int)j+"]=<"+getString(j)+">");
             }
             */
-            
+
             // top dict
-            
+
             for (int j=0; j<topdictOffsets.Length-1; j++) {
                 Seek(topdictOffsets[j]);
-                while (GetPosition() < topdictOffsets[j+1]) {                
+                while (GetPosition() < topdictOffsets[j+1]) {
                     GetDictItem();
                     if (key=="FullName") {
                         //System.err.Println("getting fullname sid = "+((Integer)args[0]).IntValue);
@@ -1042,7 +1040,7 @@ namespace iTextSharp.text.pdf {
                     }
                     else if (key=="charset"){
                         fonts[j].charsetOffset = (int)args[0];
-                        
+
                     }
                     else if (key=="Encoding"){
                         fonts[j].encodingOffset = (int)args[0];
@@ -1062,7 +1060,7 @@ namespace iTextSharp.text.pdf {
                     else if (key=="CharstringType")
                         fonts[j].CharstringType = (int)args[0];
                 }
-                
+
                 // private dict
                 if (fonts[j].privateOffset >= 0) {
                     //System.err.Println("PRIVATE::");
@@ -1070,21 +1068,21 @@ namespace iTextSharp.text.pdf {
                     while (GetPosition() < fonts[j].privateOffset+fonts[j].privateLength) {
                         GetDictItem();
                         if (key=="Subrs")
-                            //Add the private offset to the lsubrs since the offset is 
+                            //Add the private offset to the lsubrs since the offset is
                             // relative to the begining of the PrivateDict
                             fonts[j].privateSubrs = (int)args[0]+fonts[j].privateOffset;
                     }
                 }
-                
+
                 // fdarray index
                 if (fonts[j].fdarrayOffset >= 0) {
                     int[] fdarrayOffsets = GetIndex(fonts[j].fdarrayOffset);
-                    
+
                     fonts[j].fdprivateOffsets = new int[fdarrayOffsets.Length-1];
                     fonts[j].fdprivateLengths = new int[fdarrayOffsets.Length-1];
-                    
+
                     //System.err.Println("FD Font::");
-                    
+
                     for (int k=0; k<fdarrayOffsets.Length-1; k++) {
                         Seek(fdarrayOffsets[k]);
                         while (GetPosition() < fdarrayOffsets[k+1])
@@ -1093,19 +1091,19 @@ namespace iTextSharp.text.pdf {
                             fonts[j].fdprivateLengths[k]  = (int)args[0];
                             fonts[j].fdprivateOffsets[k]  = (int)args[1];
                         }
-                        
+
                     }
                 }
             }
             //System.err.Println("CFF: done");
         }
-        
+
         // ADDED BY Oren & Ygal
-        
+
         internal void ReadEncoding(int nextIndexOffset){
             int format;
             Seek(nextIndexOffset);
             format = GetCard8();
-        }    
+        }
     }
 }
