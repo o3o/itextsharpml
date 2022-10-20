@@ -30,12 +30,12 @@ namespace iTextSharp.text {
     /// </code>
     /// </example>
     public class Phrase : ArrayList, ITextElementArray {
-    
+
         // membervariables
-    
+
         /// <summary>This is the leading of this phrase.</summary>
         protected Single leading = Single.NaN;
-    
+
         ///<summary> This is the font of this phrase. </summary>
         protected Font font;
 
@@ -43,9 +43,9 @@ namespace iTextSharp.text {
         * @since   2.1.2
         */
         protected IHyphenationEvent hyphenation = null;
-        
+
         // constructors
-    
+
         /// <summary>
         /// Constructs a Phrase without specifying a leading.
         /// </summary>
@@ -53,7 +53,7 @@ namespace iTextSharp.text {
         /// Has nine overloads.
         /// </overloads>
         public Phrase() : this(16) {}
-    
+
         /**
         * Copy constructor for <CODE>Phrase</CODE>.
         */
@@ -72,7 +72,7 @@ namespace iTextSharp.text {
             this.leading = leading;
             font = new Font();
         }
-    
+
         /// <summary>
         /// Constructs a Phrase with a certain Chunk.
         /// </summary>
@@ -82,7 +82,7 @@ namespace iTextSharp.text {
             font = chunk.Font;
             hyphenation = chunk.GetHyphenation();
         }
-    
+
         /// <summary>
         /// Constructs a Phrase with a certain Chunk and a certain leading.
         /// </summary>
@@ -94,13 +94,13 @@ namespace iTextSharp.text {
             font = chunk.Font;
             hyphenation = chunk.GetHyphenation();
         }
-    
+
         /// <summary>
         /// Constructs a Phrase with a certain string.
         /// </summary>
         /// <param name="str">a string</param>
         public Phrase(string str) : this(float.NaN, str, new Font()) {}
-    
+
         /// <summary>
         /// Constructs a Phrase with a certain string and a certain Font.
         /// </summary>
@@ -108,14 +108,14 @@ namespace iTextSharp.text {
         /// <param name="font">a Font</param>
         public Phrase(string str, Font font) : this(float.NaN, str, font) {
         }
-    
+
         /// <summary>
         /// Constructs a Phrase with a certain leading and a certain string.
         /// </summary>
         /// <param name="leading">the leading</param>
         /// <param name="str">a string</param>
         public Phrase(float leading, string str) : this(leading, str, new Font()) {}
-    
+
         public Phrase(float leading, string str, Font font) {
             this.leading = leading;
             this.font = font;
@@ -124,9 +124,9 @@ namespace iTextSharp.text {
                 base.Add(new Chunk(str, font));
             }
         }
-        
+
         // implementation of the Element-methods
-    
+
         /// <summary>
         /// Processes the element by adding it (or the different parts) to an
         /// <see cref="iTextSharp.text.IElementListener"/>.
@@ -144,7 +144,7 @@ namespace iTextSharp.text {
                 return false;
             }
         }
-    
+
         /// <summary>
         /// Gets the type of the text element.
         /// </summary>
@@ -154,7 +154,7 @@ namespace iTextSharp.text {
                 return Element.PHRASE;
             }
         }
-    
+
         /// <summary>
         /// Gets all the chunks in this element.
         /// </summary>
@@ -168,7 +168,7 @@ namespace iTextSharp.text {
                 return tmp;
             }
         }
-    
+
         /**
         * @see com.lowagie.text.Element#isContent()
         * @since   iText 2.0.8
@@ -186,7 +186,7 @@ namespace iTextSharp.text {
         }
 
         // overriding some of the ArrayList-methods
-    
+
         /// <summary>
         /// Adds a Chunk, an Anchor or another Phrase
         /// to this Phrase.
@@ -211,7 +211,7 @@ namespace iTextSharp.text {
                     element.Type == Element.ANCHOR ||
                     element.Type == Element.ANNOTATION ||
                     element.Type == Element.TABLE || // line added by David Freels
-                    element.Type == Element.YMARK || 
+                    element.Type == Element.YMARK ||
                     element.Type == Element.MARKED) {
                     base.Insert(index, element);
                 }
@@ -223,7 +223,7 @@ namespace iTextSharp.text {
                 throw new Exception("Insertion of illegal Element: " + cce.Message);
             }
         }
-    
+
         /// <summary>
         /// Adds a Chunk, Anchor or another Phrase
         /// to this Phrase.
@@ -276,7 +276,7 @@ namespace iTextSharp.text {
                 throw new Exception("Insertion of illegal Element: " + cce.Message);
             }
         }
-    
+
         /// <summary>
         /// Adds a collection of Chunks
         /// to this Phrase.
@@ -289,7 +289,7 @@ namespace iTextSharp.text {
             }
             return true;
         }
-    
+
         /// <summary>
         /// Adds a Chunk.
         /// </summary>
@@ -329,7 +329,7 @@ namespace iTextSharp.text {
             base.Add(newChunk);
             return true;
         }
-    
+
         /// <summary>
         /// Adds a Object to the Paragraph.
         /// </summary>
@@ -337,11 +337,11 @@ namespace iTextSharp.text {
         public void AddSpecial(Object obj) {
             base.Add(obj);
         }
-    
+
         // methods
-    
+
         // methods to retrieve information
-    
+
         /// <summary>
         /// Checks is this Phrase contains no or 1 empty Chunk.
         /// </summary>
@@ -363,7 +363,7 @@ namespace iTextSharp.text {
                     return false;
             }
         }
-    
+
         public bool HasLeading() {
             if (float.IsNaN(leading)) {
                 return false;
@@ -387,7 +387,7 @@ namespace iTextSharp.text {
                 this.leading = value;
             }
         }
-    
+
         /// <summary>
         /// Gets the font of the first Chunk that appears in this Phrase.
         /// </summary>
@@ -400,7 +400,7 @@ namespace iTextSharp.text {
                 font = value;
             }
         }
-    
+
     /**
     * Returns the content as a String object.
     * This method differs from toString because toString will return an ArrayList with the toString value of the Chunks in this Phrase.
@@ -421,7 +421,7 @@ namespace iTextSharp.text {
         public static bool IsTag(string tag) {
             return ElementTags.PHRASE.Equals(tag);
         }
-    
+
         public override string ToString() {
             return base.ToString();
         }
@@ -439,18 +439,18 @@ namespace iTextSharp.text {
                 return hyphenation;
             }
         }
-        
+
 
         // kept for historical reasons; people should use FontSelector
         // eligable for deprecation, but the methods are mentioned in the book p277.
-        
+
         /**
         * Constructs a Phrase that can be used in the static GetInstance() method.
         * @param	dummy	a dummy parameter
         */
         private Phrase(bool dummy) {
         }
-        
+
         /**
         * Gets a special kind of Phrase that changes some characters into corresponding symbols.
         * @param string
@@ -459,7 +459,7 @@ namespace iTextSharp.text {
         public static Phrase GetInstance(String str) {
     	    return GetInstance(16, str, new Font());
         }
-        
+
         /**
         * Gets a special kind of Phrase that changes some characters into corresponding symbols.
         * @param leading
@@ -469,7 +469,7 @@ namespace iTextSharp.text {
         public static Phrase GetInstance(int leading, String str) {
     	    return GetInstance(leading, str, new Font());
         }
-        
+
         /**
         * Gets a special kind of Phrase that changes some characters into corresponding symbols.
         * @param leading

@@ -6,7 +6,7 @@ using iTextSharp.text.html;
 
 /*
  * $Id: Font.cs,v 1.11 2008/05/13 11:25:10 psoares33 Exp $
- * 
+ *
  *
  * Copyright 1999, 2000, 2001, 2002 by Bruno Lowagie.
  *
@@ -65,71 +65,71 @@ namespace iTextSharp.text {
     /// </code>
     /// </example>
     public class Font : IComparable {
-    
+
         // static membervariables for the different families
-    
+
         /// <summary> a possible value of a font family. </summary>
         public const int COURIER = 0;
-    
+
         /// <summary> a possible value of a font family. </summary>
         public const int HELVETICA = 1;
-    
+
         /// <summary> a possible value of a font family. </summary>
         public const int TIMES_ROMAN = 2;
-    
+
         /// <summary> a possible value of a font family. </summary>
         public const int SYMBOL = 3;
-    
+
         /// <summary> a possible value of a font family. </summary>
         public const int ZAPFDINGBATS = 4;
-    
+
         // static membervariables for the different styles
-    
+
         /// <summary> this is a possible style. </summary>
         public const int NORMAL        = 0;
-    
+
         /// <summary> this is a possible style. </summary>
         public const int BOLD        = 1;
-    
+
         /// <summary> this is a possible style. </summary>
         public const int ITALIC        = 2;
-    
+
         /// <summary> this is a possible style. </summary>
         public const int UNDERLINE    = 4;
-    
+
         /// <summary> this is a possible style. </summary>
         public const int STRIKETHRU    = 8;
-    
+
         /// <summary> this is a possible style. </summary>
         public const int BOLDITALIC    = BOLD | ITALIC;
-    
+
         // static membervariables
-    
+
         /// <summary> the value of an undefined attribute. </summary>
         public const int UNDEFINED = -1;
-    
+
         /// <summary> the value of the default size. </summary>
         public const int DEFAULTSIZE = 12;
-    
+
         // membervariables
-    
+
         /// <summary> the value of the fontfamily. </summary>
         private int family = UNDEFINED;
-    
+
         /// <summary> the value of the fontsize. </summary>
         private float size = UNDEFINED;
-    
+
         /// <summary> the value of the style. </summary>
         private int style = UNDEFINED;
-    
+
         /// <summary> the value of the color. </summary>
         private Color color;
-    
+
         /// <summary> the external font </summary>
         private BaseFont baseFont = null;
-    
+
         // constructors
-    
+
         /**
         * Copy constructor of a Font
         * @param other the font that has to be copied
@@ -141,7 +141,7 @@ namespace iTextSharp.text {
             this.style = other.style;
             this.baseFont = other.baseFont;
         }
-        
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
@@ -155,7 +155,7 @@ namespace iTextSharp.text {
             this.style = style;
             this.color = color;
         }
-    
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
@@ -169,7 +169,7 @@ namespace iTextSharp.text {
             this.style = style;
             this.color = color;
         }
-    
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
@@ -177,20 +177,20 @@ namespace iTextSharp.text {
         /// <param name="size">the size of this font</param>
         /// <param name="style">the style of this font</param>
         public Font(BaseFont bf, float size, int style) : this(bf, size, style, null) {}
-    
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
         /// <param name="bf">the external font</param>
         /// <param name="size">the size of this font</param>
         public Font(BaseFont bf, float size) : this(bf, size, UNDEFINED, null) {}
-    
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
         /// <param name="bf">the external font</param>
         public Font(BaseFont bf) : this(bf, UNDEFINED, UNDEFINED, null) {}
-    
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
@@ -198,20 +198,20 @@ namespace iTextSharp.text {
         /// <param name="size">the size of this font</param>
         /// <param name="style">the style of this font</param>
         public Font(int family, float size, int style) : this(family, size, style, null) {}
-    
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
         /// <param name="family">the family to which this font belongs</param>
         /// <param name="size">the size of this font</param>
         public Font(int family, float size) : this(family, size, UNDEFINED, null) {}
-    
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
         /// <param name="family">the family to which this font belongs</param>
         public Font(int family) : this(family, UNDEFINED, UNDEFINED, null) {}
-    
+
         /// <summary>
         /// Constructs a Font.
         /// </summary>
@@ -219,9 +219,9 @@ namespace iTextSharp.text {
         /// Has nine overloads.
         /// </overloads>
         public Font() : this(UNDEFINED, UNDEFINED, UNDEFINED, null) {}
-    
+
         // implementation of the Comparable interface
-    
+
         /// <summary>
         /// Compares this Font with another
         /// </summary>
@@ -264,7 +264,7 @@ namespace iTextSharp.text {
                 return -3;
             }
         }
-    
+
         // FAMILY
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace iTextSharp.text {
                 return family;
             }
         }
-    
+
         /// <summary>
         /// Gets the familyname as a string.
         /// </summary>
@@ -315,7 +315,7 @@ namespace iTextSharp.text {
                 return tmp;
             }
         }
-    
+
         /// <summary>
         /// Sets the family using a String ("Courier",
         /// "Helvetica", "Times New Roman", "Symbol" or "ZapfDingbats").
@@ -349,9 +349,9 @@ namespace iTextSharp.text {
             }
             return UNDEFINED;
         }
-    
+
     	// SIZE
-	
+
         /// <summary>
         /// Get/set the size of this font.
         /// </summary>
@@ -364,10 +364,10 @@ namespace iTextSharp.text {
                 this.size = value;
             }
         }
-    
+
         /** Gets the size that can be used with the calculated <CODE>BaseFont</CODE>.
         * @return the size that can be used with the calculated <CODE>BaseFont</CODE>
-        */    
+        */
         public float CalculatedSize {
             get {
                 float s = this.size;
@@ -380,7 +380,7 @@ namespace iTextSharp.text {
 
         /**
         * Gets the leading that can be used with this font.
-        * 
+        *
         * @param linespacing
         *            a certain linespacing
         * @return the height of a line
@@ -400,10 +400,10 @@ namespace iTextSharp.text {
                 return style;
             }
         }
-    
+
         /** Gets the style that can be used with the calculated <CODE>BaseFont</CODE>.
         * @return the style that can be used with the calculated <CODE>BaseFont</CODE>
-        */    
+        */
         public int CalculatedStyle {
             get {
                 int style = this.style;
@@ -418,7 +418,7 @@ namespace iTextSharp.text {
                     return style & (~BOLDITALIC);
             }
         }
-        
+
         /// <summary>
         /// checks if this font is Bold.
         /// </summary>
@@ -429,7 +429,7 @@ namespace iTextSharp.text {
             }
             return (style &    BOLD) == BOLD;
         }
-    
+
         /// <summary>
         /// checks if this font is Bold.
         /// </summary>
@@ -440,7 +440,7 @@ namespace iTextSharp.text {
             }
             return (style &    ITALIC) == ITALIC;
         }
-    
+
         /// <summary>
         /// checks if this font is underlined.
         /// </summary>
@@ -451,7 +451,7 @@ namespace iTextSharp.text {
             }
             return (style &    UNDERLINE) == UNDERLINE;
         }
-    
+
         /// <summary>
         /// checks if the style of this font is STRIKETHRU.
         /// </summary>
@@ -462,7 +462,7 @@ namespace iTextSharp.text {
             }
             return (style &    STRIKETHRU) == STRIKETHRU;
         }
-    
+
         /// <summary>
         /// Sets the style using a String containing one of
         /// more of the following values: normal, bold, italic, underline, strike.
@@ -477,11 +477,11 @@ namespace iTextSharp.text {
         * Sets the style.
         * @param    style    the style.
         */
-            
+
         public virtual void SetStyle(int style) {
             this.style = style;
         }
-            
+
         /// <summary>
         /// Translates a string-value of a certain style
         /// into the index value is used for this style in this class.
@@ -510,8 +510,8 @@ namespace iTextSharp.text {
             }
             return s;
         }
-    
-    
+
+
         // COLOR
 
         /// <summary>
@@ -526,7 +526,7 @@ namespace iTextSharp.text {
                 this.color = value;
             }
         }
-    
+
         /// <summary>
         /// Sets the color.
         /// </summary>
@@ -536,7 +536,7 @@ namespace iTextSharp.text {
         public virtual void SetColor(int red, int green, int blue) {
             this.color = new Color(red, green, blue);
         }
-    
+
         // BASEFONT
 
         /// <summary>
@@ -554,7 +554,7 @@ namespace iTextSharp.text {
         * @param specialEncoding <CODE>true</CODE> to use the special encoding for Symbol and ZapfDingbats,
         * <CODE>false</CODE> to always use <CODE>Cp1252</CODE>
         * @return the <CODE>BaseFont</CODE> this class represents
-        */    
+        */
         public BaseFont GetCalculatedBaseFont(bool specialEncoding) {
             if (baseFont != null)
                 return baseFont;
@@ -648,7 +648,7 @@ namespace iTextSharp.text {
                 && color == null
                 && baseFont == null);
         }
-    
+
         /// <summary>
         /// Replaces the attributes that are equal to null with
         /// the attributes of a given font.

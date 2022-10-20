@@ -1,54 +1,7 @@
 using System;
 using System.Text;
 using iTextSharp.text;
-/*
- * $Id: Barcode128.cs,v 1.6 2007/10/24 16:31:54 psoares33 Exp $
- *
- * Copyright 2002-2006 by Paulo Soares.
- *
- * The contents of this file are subject to the Mozilla Public License Version 1.1
- * (the "License"); you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at http://www.mozilla.org/MPL/
- *
- * Software distributed under the License is distributed on an "AS IS" basis,
- * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
- * for the specific language governing rights and limitations under the License.
- *
- * The Original Code is 'iText, a free JAVA-PDF library'.
- *
- * The Initial Developer of the Original Code is Bruno Lowagie. Portions created by
- * the Initial Developer are Copyright (C) 1999, 2000, 2001, 2002 by Bruno Lowagie.
- * All Rights Reserved.
- * Co-Developer of the code is Paulo Soares. Portions created by the Co-Developer
- * are Copyright (C) 2000, 2001, 2002 by Paulo Soares. All Rights Reserved.
- *
- * Contributor(s): all the names of the contributors are added in the source code
- * where applicable.
- *
- * Alternatively, the contents of this file may be used under the terms of the
- * LGPL license (the "GNU LIBRARY GENERAL PUBLIC LICENSE"), in which case the
- * provisions of LGPL are applicable instead of those above.  If you wish to
- * allow use of your version of this file only under the terms of the LGPL
- * License and not to allow others to use your version of this file under
- * the MPL, indicate your decision by deleting the provisions above and
- * replace them with the notice and other provisions required by the LGPL.
- * If you do not delete the provisions above, a recipient may use your version
- * of this file under either the MPL or the GNU LIBRARY GENERAL PUBLIC LICENSE.
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the MPL as stated above or under the terms of the GNU
- * Library General Public License as published by the Free Software Foundation;
- * either version 2 of the License, or any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Library general Public License for more
- * details.
- *
- * If you didn't download this code from the following link, you should check if
- * you aren't using an obsolete version:
- * http://www.lowagie.com/iText/
- */
+
 namespace iTextSharp.text.pdf {
     /** Implements the code 128 and UCC/EAN-128. Other symbologies are allowed in raw mode.<p>
      * The code types allowed are:<br>
@@ -74,8 +27,8 @@ namespace iTextSharp.text.pdf {
     public class Barcode128 : Barcode {
 
         /** The bars to generate the code.
-        */    
-        private static readonly byte[][] BARS = 
+        */
+        private static readonly byte[][] BARS =
         {
             new byte[] {2, 1, 2, 2, 2, 2},
             new byte[] {2, 2, 2, 1, 2, 2},
@@ -184,9 +137,9 @@ namespace iTextSharp.text.pdf {
             new byte[] {2, 1, 1, 2, 1, 4},
             new byte[] {2, 1, 1, 2, 3, 2}
         };
-        
+
         /** The stop bars.
-        */    
+        */
         private static readonly byte[] BARS_STOP = {2, 3, 3, 1, 1, 1, 2};
         /** The charset code change.
         */
@@ -221,9 +174,9 @@ namespace iTextSharp.text.pdf {
         public const char STARTA = '\u00cb';
         public const char STARTB = '\u00cc';
         public const char STARTC = '\u00cd';
-        
+
         private static IntHashtable ais = new IntHashtable();
-        
+
         /** Creates new Barcode128 */
         public Barcode128() {
             x = 0.8f;
@@ -239,7 +192,7 @@ namespace iTextSharp.text.pdf {
         * Removes the FNC1 codes in the text.
         * @param code the text to clean
         * @return the cleaned text
-        */    
+        */
         public static String RemoveFNC1(String code) {
             int len = code.Length;
             StringBuilder buf = new StringBuilder(len);
@@ -250,12 +203,12 @@ namespace iTextSharp.text.pdf {
             }
             return buf.ToString();
         }
-        
+
         /**
         * Gets the human readable text of a sequence of AI.
         * @param code the text
         * @return the human readable text
-        */    
+        */
         public static String GetHumanReadableUCCEAN(String code) {
             StringBuilder buf = new StringBuilder();
             String fnc1 = FNC1.ToString();
@@ -301,14 +254,14 @@ namespace iTextSharp.text.pdf {
             buf.Append(RemoveFNC1(code));
             return buf.ToString();
         }
-        
+
         /** Returns <CODE>true</CODE> if the next <CODE>numDigits</CODE>
         * starting from index <CODE>textIndex</CODE> are numeric skipping any FNC1.
         * @param text the text to check
         * @param textIndex where to check from
         * @param numDigits the number of digits to check
         * @return the check result
-        */    
+        */
         internal static bool IsNextDigits(string text, int textIndex, int numDigits) {
             int len = text.Length;
             while (textIndex < len && numDigits > 0) {
@@ -328,14 +281,14 @@ namespace iTextSharp.text.pdf {
             }
             return numDigits == 0;
         }
-        
+
         /** Packs the digits for charset C also considering FNC1. It assumes that all the parameters
         * are valid.
         * @param text the text to pack
         * @param textIndex where to pack from
         * @param numDigits the number of digits to pack. It is always an even number
         * @return the packed digits, two digits per character
-        */    
+        */
         internal static String GetPackedRawDigits(String text, int textIndex, int numDigits) {
             String outs = "";
             int start = textIndex;
@@ -352,14 +305,14 @@ namespace iTextSharp.text.pdf {
             }
             return (char)(textIndex - start) + outs;
         }
-        
+
         /** Converts the human readable text to the characters needed to
         * create a barcode. Some optimization is done to get the shortest code.
         * @param text the text to convert
         * @param ucc <CODE>true</CODE> if it is an UCC/EAN-128. In this case
         * the character FNC1 is added
         * @return the code ready to be fed to GetBarsCode128Raw()
-        */    
+        */
         public static string GetRawText(string text, bool ucc) {
             String outs = "";
             int tLen = text.Length;
@@ -484,12 +437,12 @@ namespace iTextSharp.text.pdf {
             }
             return outs;
         }
-        
+
         /** Generates the bars. The input has the actual barcodes, not
         * the human readable text.
         * @param text the barcode
         * @return the bars
-        */    
+        */
         public static byte[] GetBarsCode128Raw(string text) {
             int k;
             int idx = text.IndexOf('\uffff');
@@ -506,7 +459,7 @@ namespace iTextSharp.text.pdf {
             Array.Copy(BARS_STOP, 0, bars, k * 6, 7);
             return bars;
         }
-        
+
         /** Gets the maximum area that the barcode and the text, if
         * any, will occupy. The lower left corner is always (0, 0).
         * @return the size the barcode occupies.
@@ -551,7 +504,7 @@ namespace iTextSharp.text.pdf {
                 return new Rectangle(fullWidth, fullHeight);
             }
         }
-        
+
         /** Places the barcode in a <CODE>PdfContentByte</CODE>. The
         * barcode is always placed at coodinates (0, 0). Use the
         * translation matrix to move it elsewhere.<p>
@@ -668,7 +621,7 @@ namespace iTextSharp.text.pdf {
                 cb.EndText();
             }
             return this.BarcodeSize;
-        }    
+        }
 
         public override System.Drawing.Image CreateDrawingImage(System.Drawing.Color foreground, System.Drawing.Color background) {
             String bCode;
@@ -746,7 +699,7 @@ namespace iTextSharp.text.pdf {
                     base.Code = code;
             }
         }
-        
+
         static Barcode128 () {
             ais[0] = 20;
             ais[1] = 16;

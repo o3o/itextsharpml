@@ -6,7 +6,7 @@ using iTextSharp.text.pdf;
 
 /*
  * $Id: Rectangle.cs,v 1.18 2008/05/13 11:25:12 psoares33 Exp $
- * 
+ *
  *
  * Copyright 1999, 2000, 2001, 2002 by Bruno Lowagie.
  *
@@ -63,53 +63,53 @@ namespace iTextSharp.text {
     /// <seealso cref="T:iTextSharp.text.Cell"/>
     /// <seealso cref="T:iTextSharp.text.HeaderFooter"/>
     public class Rectangle : Element, IElement {
-    
+
         // static membervariables (concerning the presence of borders)
-    
+
         ///<summary> This is the value that will be used as <VAR>undefined</VAR>. </summary>
         public const int UNDEFINED = -1;
-    
+
         ///<summary> This represents one side of the border of the Rectangle. </summary>
         public const int TOP_BORDER = 1;
-    
+
         ///<summary> This represents one side of the border of the Rectangle. </summary>
         public const int BOTTOM_BORDER = 2;
-    
+
         ///<summary> This represents one side of the border of the Rectangle. </summary>
         public const int LEFT_BORDER = 4;
-    
+
         ///<summary> This represents one side of the border of the Rectangle. </summary>
         public const int RIGHT_BORDER = 8;
-    
+
         ///<summary> This represents a rectangle without borders. </summary>
         public const int NO_BORDER = 0;
-    
+
         ///<summary> This represents a type of border. </summary>
         public const int BOX = TOP_BORDER + BOTTOM_BORDER + LEFT_BORDER + RIGHT_BORDER;
-    
+
         // membervariables
-    
+
         ///<summary> the lower left x-coordinate. </summary>
         protected float llx;
-    
+
         ///<summary> the lower left y-coordinate. </summary>
         protected float lly;
-    
+
         ///<summary> the upper right x-coordinate. </summary>
         protected float urx;
-    
+
         ///<summary> the upper right y-coordinate. </summary>
         protected float ury;
-    
+
         ///<summary> This represents the status of the 4 sides of the rectangle. </summary>
         protected int border = UNDEFINED;
-    
+
         ///<summary> This is the width of the border around this rectangle. </summary>
         protected float borderWidth = UNDEFINED;
-    
+
         ///<summary> This is the color of the border of this rectangle. </summary>
         protected Color borderColor = null;
-    
+
         /** The color of the left border of this rectangle. */
         protected Color borderColorLeft = null;
 
@@ -139,12 +139,12 @@ namespace iTextSharp.text {
 
         ///<summary> This is the color of the background of this rectangle. </summary>
         protected Color backgroundColor = null;
-    
+
         ///<summary> This is the rotation value of this rectangle. </summary>
         protected int rotation = 0;
 
         // constructors
-    
+
         /// <summary>
         /// Constructs a Rectangle-object.
         /// </summary>
@@ -158,14 +158,14 @@ namespace iTextSharp.text {
             this.urx = urx;
             this.ury = ury;
         }
-    
+
         /// <summary>
         /// Constructs a Rectangle-object starting from the origin (0, 0).
         /// </summary>
         /// <param name="urx">upper right x</param>
         /// <param name="ury">upper right y</param>
         public Rectangle(float urx, float ury) : this(0, 0, urx, ury) {}
-    
+
         /// <summary>
         /// Constructs a Rectangle-object.
         /// </summary>
@@ -177,7 +177,7 @@ namespace iTextSharp.text {
         /**
         * Copies all of the parameters from a <CODE>Rectangle</CODE> object
         * except the position.
-        * 
+        *
         * @param rect
         *            <CODE>Rectangle</CODE> to copy from
         */
@@ -202,7 +202,7 @@ namespace iTextSharp.text {
         /**
         * Copies all of the parameters from a <CODE>Rectangle</CODE> object
         * except the position.
-        * 
+        *
         * @param rect
         *            <CODE>Rectangle</CODE> to copy from
         */
@@ -239,7 +239,7 @@ namespace iTextSharp.text {
         }
 
         // implementation of the Element interface
-    
+
         /// <summary>
         /// Processes the element by adding it (or the different parts) to an
         /// IElementListener.
@@ -254,7 +254,7 @@ namespace iTextSharp.text {
                 return false;
             }
         }
-    
+
         /// <summary>
         /// Gets the type of the text element.
         /// </summary>
@@ -264,7 +264,7 @@ namespace iTextSharp.text {
                 return Element.RECTANGLE;
             }
         }
-    
+
         /// <summary>
         /// Gets all the chunks in this element.
         /// </summary>
@@ -274,7 +274,7 @@ namespace iTextSharp.text {
                 return new ArrayList();
             }
         }
-    
+
         /**
         * @see com.lowagie.text.Element#isContent()
         * @since   iText 2.0.8
@@ -292,7 +292,7 @@ namespace iTextSharp.text {
         }
 
         // methods
-    
+
         /**
         * Switches lowerleft with upperright
         */
@@ -327,7 +327,7 @@ namespace iTextSharp.text {
             }
             return tmp;
         }
-    
+
         /// <summary>
         /// Swaps the values of urx and ury and of lly and llx in order to rotate the rectangle.
         /// </summary>
@@ -338,11 +338,11 @@ namespace iTextSharp.text {
             rect.rotation %= 360;
             return rect;
         }
-    
+
         // methods to set the membervariables
-    
+
         /// <summary>
-        /// Get/set the upper right y-coordinate. 
+        /// Get/set the upper right y-coordinate.
         /// </summary>
         /// <value>a float</value>
         public virtual float Top {
@@ -357,7 +357,7 @@ namespace iTextSharp.text {
 
         /**
         * Enables the border on the specified side.
-        * 
+        *
         * @param side
         *            the side to enable. One of <CODE>LEFT, RIGHT, TOP, BOTTOM
         *            </CODE>
@@ -371,7 +371,7 @@ namespace iTextSharp.text {
 
         /**
         * Disables the border on the specified side.
-        * 
+        *
         * @param side
         *            the side to disable. One of <CODE>LEFT, RIGHT, TOP, BOTTOM
         *            </CODE>
@@ -397,7 +397,7 @@ namespace iTextSharp.text {
                 border = value;
             }
         }
-    
+
         /// <summary>
         /// Get/set the grayscale of the rectangle.
         /// </summary>
@@ -412,9 +412,9 @@ namespace iTextSharp.text {
             set {
                 backgroundColor = new GrayColor(value);            }
         }
-    
+
         // methods to get the membervariables
-    
+
         /// <summary>
         /// Get/set the lower left x-coordinate.
         /// </summary>
@@ -428,7 +428,7 @@ namespace iTextSharp.text {
                 llx = value;
             }
         }
-    
+
         /// <summary>
         /// Get/set the upper right x-coordinate.
         /// </summary>
@@ -437,12 +437,12 @@ namespace iTextSharp.text {
             get {
                 return urx;
             }
-        
+
             set {
                 urx = value;
             }
         }
-    
+
         /// <summary>
         /// Get/set the lower left y-coordinate.
         /// </summary>
@@ -455,7 +455,7 @@ namespace iTextSharp.text {
                 lly = value;
             }
         }
-    
+
         public virtual Color BorderColorBottom {
             get {
                 if (borderColorBottom == null) return borderColor;
@@ -465,7 +465,7 @@ namespace iTextSharp.text {
                 borderColorBottom = value;
             }
         }
-    
+
         public virtual Color BorderColorTop {
             get {
                 if (borderColorTop == null) return borderColor;
@@ -475,7 +475,7 @@ namespace iTextSharp.text {
                 borderColorTop = value;
             }
         }
-    
+
         public virtual Color BorderColorLeft {
             get {
                 if (borderColorLeft == null) return borderColor;
@@ -485,7 +485,7 @@ namespace iTextSharp.text {
                 borderColorLeft = value;
             }
         }
-    
+
         public virtual Color BorderColorRight {
             get {
                 if (borderColorRight == null) return borderColor;
@@ -495,7 +495,7 @@ namespace iTextSharp.text {
                 borderColorRight = value;
             }
         }
-    
+
         /// <summary>
         /// Returns the lower left x-coordinate, considering a given margin.
         /// </summary>
@@ -504,7 +504,7 @@ namespace iTextSharp.text {
         public virtual float GetLeft(float margin) {
             return llx + margin;
         }
-    
+
         /// <summary>
         /// Returns the upper right x-coordinate, considering a given margin.
         /// </summary>
@@ -513,7 +513,7 @@ namespace iTextSharp.text {
         public virtual float GetRight(float margin) {
             return urx - margin;
         }
-    
+
         /// <summary>
         /// Returns the upper right y-coordinate, considering a given margin.
         /// </summary>
@@ -522,7 +522,7 @@ namespace iTextSharp.text {
         public virtual float GetTop(float margin) {
             return ury - margin;
         }
-    
+
         /// <summary>
         /// Returns the lower left y-coordinate, considering a given margin.
         /// </summary>
@@ -531,7 +531,7 @@ namespace iTextSharp.text {
         public virtual float GetBottom(float margin) {
             return lly + margin;
         }
-    
+
         /// <summary>
         /// Returns the width of the rectangle.
         /// </summary>
@@ -544,7 +544,7 @@ namespace iTextSharp.text {
                 throw new InvalidOperationException("The width cannot be set.");
             }
         }
-    
+
         /// <summary>
         /// Returns the height of the rectangle.
         /// </summary>
@@ -554,7 +554,7 @@ namespace iTextSharp.text {
                 return ury - lly;
             }
         }
-    
+
         /// <summary>
         /// Indicates if the table has borders.
         /// </summary>
@@ -569,7 +569,7 @@ namespace iTextSharp.text {
                         || borderWidthRight > 0 || borderWidthTop > 0 || borderWidthBottom > 0;
             }
         }
-    
+
         /// <summary>
         /// Indicates if the table has a some type of border.
         /// </summary>
@@ -580,7 +580,7 @@ namespace iTextSharp.text {
                 return false;
             return (border & type) == type;
         }
-    
+
         /// <summary>
         /// Get/set the borderwidth.
         /// </summary>
@@ -594,7 +594,7 @@ namespace iTextSharp.text {
                 borderWidth = value;
             }
         }
-    
+
         /**
          * Gets the color of the border.
          *
@@ -613,7 +613,7 @@ namespace iTextSharp.text {
                 borderColor = value;
             }
         }
-    
+
         /**
          * Gets the backgroundcolor.
          *
@@ -636,13 +636,13 @@ namespace iTextSharp.text {
         /// <summary>
         /// Returns the rotation
         /// </summary>
-        /// <value>a int</value>    
+        /// <value>a int</value>
         public int Rotation {
             get {
                 return rotation;
             }
         }
-    
+
         public virtual float BorderWidthLeft {
             get {
                 return GetVariableBorderWidth(borderWidthLeft, LEFT_BORDER);
@@ -686,7 +686,7 @@ namespace iTextSharp.text {
         /**
         * Updates the border flag for a side based on the specified width. A width
         * of 0 will disable the border on that side. Any other width enables it.
-        * 
+        *
         * @param width
         *            width of border
         * @param side
@@ -710,7 +710,7 @@ namespace iTextSharp.text {
 
         /**
         * Sets a parameter indicating if the rectangle has variable borders
-        * 
+        *
         * @param useVariableBorders
         *            indication if the rectangle has variable borders
         */
